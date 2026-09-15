@@ -185,7 +185,7 @@ static header * allocate_chunk(size_t size) {
  *
  * @return the actual number of bytes the user will need to be allocated
  */
- size_t refined_size(size_t raw_size) {
+size_t refined_size(size_t raw_size) {
   size_t modulo = raw_size % 8;
   if (modulo == 0) {  //THIS MAY NEED TO NOT BE HARDCODED TO 8
     return raw_size;
@@ -193,9 +193,40 @@ static header * allocate_chunk(size_t size) {
   if (((raw_size + modulo) % 8) != 0) {
     printf("FUCK line 194, adding modulo and raw size does not fix this");
   }
-
+  
+  if ((raw_size + modulo) < MIN_ALLOCATION) {
+    return MIN_ALLOCATION;
+  }
   return raw_size + modulo;
- }
+}
+
+
+/**
+ * @brief Helper to find a block of the right size in the free list
+ *
+ * @param actual_size
+ *
+ * @return a pointer to the block in the free list
+*/
+header * find_free(size_t actual_size) { // actual_size does not include the header. see if we need to add the header size to actualsize
+  header *p = NULL;
+  header *next = NULL;
+  for (int i = 1; i < N_LISTS; i++) { // start at 1 becuase 0 does not contain a list
+    p = &freelistSentinels[i];
+    if (p.size >= actual_size) {
+      return p;
+    }
+    next = p.next;
+    while (next != p) {  //double check that the pointers are both looking at locations
+      if (next.size >= actual_size) {
+        return next;
+      }
+    }
+  }
+  return NULL;
+    
+}
+
 
 /**
  * @brief Helper allocate an object given a raw request size from the user
@@ -211,6 +242,7 @@ static inline header * allocate_object(size_t raw_size) {
   }
 
   size_t actual_size = refined_size(raw_size);
+  header *free = find_free(actual_size);
   exit(1);
 }
 
