@@ -193,7 +193,7 @@ size_t refined_size(size_t raw_size) {
   if (((raw_size + modulo) % 8) != 0) {
     printf("FUCK line 194, adding modulo and raw size does not fix this");
   }
-  
+
   if ((raw_size + modulo) < MIN_ALLOCATION) {
     return MIN_ALLOCATION;
   }
@@ -211,14 +211,12 @@ size_t refined_size(size_t raw_size) {
 header * find_free(size_t actual_size) { // actual_size does not include the header. see if we need to add the header size to actualsize
   header *p = NULL;
   header *next = NULL;
-  p = &freelistSentinels[N_LISTS - 1];
-  if (p->size_state >= actual_size) {
-    return p;
-  }
-  next = p->next;
-  while (next != p) {  //double check that the pointers are both looking at locations
-    if (next->size_state >= actual_size) {
-      return next;
+  int i = actual_size / 8;
+  for (i; i < N_LISTS; i++) {
+    p = &freelistSentinels[i];
+    next = p->next;
+    if (next != p && p->size > actual_size) {
+      return p;
     }
   }
   return NULL;
