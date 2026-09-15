@@ -179,6 +179,25 @@ static header * allocate_chunk(size_t size) {
 }
 
 /**
+ * @brief Helper return raw_size rounded up to the next multiple of 8
+ *
+ * @param raw_size number of bytes the user needs
+ *
+ * @return the actual number of bytes the user will need to be allocated
+ */
+ size_t refined_size(size_t raw_size) {
+  size_t modulo = raw_size % 8;
+  if (modulo == 0) {  //THIS MAY NEED TO NOT BE HARDCODED TO 8
+    return raw_size;
+  }
+  if (((raw_size + modulo) % 8) != 0) {
+    printf("FUCK line 194, adding modulo and raw size does not fix this")
+  }
+
+  return raw_size + modulo
+ }
+
+/**
  * @brief Helper allocate an object given a raw request size from the user
  *
  * @param raw_size number of bytes the user needs
@@ -187,10 +206,11 @@ static header * allocate_chunk(size_t size) {
  */
 static inline header * allocate_object(size_t raw_size) {
   // TODO implement allocation
-  (void) raw_size;
   if (raw_size == 0) {
     return NULL;
   }
+
+  actual_size = refined_size(raw_size);
   exit(1);
 }
 
