@@ -210,7 +210,7 @@ static inline header * allocate_object(size_t raw_size) {
     return NULL;
   }
 
-  actual_size = refined_size(raw_size);
+  size_t actual_size = refined_size(raw_size);
   exit(1);
 }
 
