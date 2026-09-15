@@ -211,20 +211,17 @@ size_t refined_size(size_t raw_size) {
 header * find_free(size_t actual_size) { // actual_size does not include the header. see if we need to add the header size to actualsize
   header *p = NULL;
   header *next = NULL;
-  for (int i = 1; i < N_LISTS; i++) { // start at 1 becuase 0 does not contain a list
-    p = &freelistSentinels[i];
-    if (p->size_state >= actual_size) {
-      return p;
-    }
-    next = p->next;
-    while (next != p) {  //double check that the pointers are both looking at locations
-      if (next->size_state >= actual_size) {
-        return next;
-      }
+  p = &freelistSentinels[N_LISTS - 1];
+  if (p->size_state >= actual_size) {
+    return p;
+  }
+  next = p->next;
+  while (next != p) {  //double check that the pointers are both looking at locations
+    if (next->size_state >= actual_size) {
+      return next;
     }
   }
   return NULL;
-    
 }
 
 
