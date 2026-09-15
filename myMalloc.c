@@ -191,10 +191,10 @@ static header * allocate_chunk(size_t size) {
     return raw_size;
   }
   if (((raw_size + modulo) % 8) != 0) {
-    printf("FUCK line 194, adding modulo and raw size does not fix this")
+    printf("FUCK line 194, adding modulo and raw size does not fix this");
   }
 
-  return raw_size + modulo
+  return raw_size + modulo;
  }
 
 /**
