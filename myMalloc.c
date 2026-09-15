@@ -215,7 +215,7 @@ header * find_free(size_t actual_size) { // actual_size does not include the hea
   for (i; i < N_LISTS; i++) {
     p = &freelistSentinels[i];
     next = p->next;
-    if (next != p && p->size > actual_size) {
+    if (next != p && p->size_state > actual_size) {
       return p;
     }
   }
