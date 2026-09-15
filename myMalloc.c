@@ -213,12 +213,12 @@ header * find_free(size_t actual_size) { // actual_size does not include the hea
   header *next = NULL;
   for (int i = 1; i < N_LISTS; i++) { // start at 1 becuase 0 does not contain a list
     p = &freelistSentinels[i];
-    if (p.size >= actual_size) {
+    if (p->size >= actual_size) {
       return p;
     }
-    next = p.next;
+    next = p->next;
     while (next != p) {  //double check that the pointers are both looking at locations
-      if (next.size >= actual_size) {
+      if (next->size >= actual_size) {
         return next;
       }
     }
