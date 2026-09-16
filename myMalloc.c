@@ -179,29 +179,6 @@ static header * allocate_chunk(size_t size) {
 }
 
 /**
- * @brief Helper return raw_size rounded up to the next multiple of 8
- *
- * @param raw_size number of bytes the user needs
- *
- * @return the actual number of bytes the user will need to be allocated
- */
-size_t refined_size(size_t raw_size) {
-  size_t modulo = raw_size % 8;
-  if (modulo == 0) {  //THIS MAY NEED TO NOT BE HARDCODED TO 8
-    return raw_size;
-  }
-  if (((raw_size + modulo) % 8) != 0) {
-    printf("FUCK line 194, adding modulo and raw size does not fix this");
-  }
-
-  if ((raw_size + modulo) < MIN_ALLOCATION) {
-    return MIN_ALLOCATION;
-  }
-  return raw_size + modulo;
-}
-
-
-/**
  * @brief Helper to find a block of the right size in the free list
  *
  * @param actual_size
@@ -236,7 +213,19 @@ static inline header * allocate_object(size_t raw_size) {
     return NULL;
   }
 
-  size_t actual_size = refined_size(raw_size);
+  //make sure we are allocating enough bytes
+  size_t round_s = ((raw_size + 7) / 8) * 8;
+  if (round_s < sizeof(header)) {
+    round_s = sizeof(header);
+  }
+
+  int list_num = round_s / 8 - 1;
+  if (list_num >= N_LISTS) {
+    listNum = N_LISTS - 1;
+  }
+
+  size_t total_size = round_s + ALLOC_HEADER_SIZE;
+
   header *free = find_free(actual_size);
   exit(1);
 }
