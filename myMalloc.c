@@ -236,6 +236,7 @@ static inline header * allocate_object(size_t raw_size) {
     }
   }
 
+  //TODO: if this is the last list we need to find a different obj
   assert(p != NULL && get_size(p) >= total_size);
 
   if (p != NULL && p->size_state >= total_size) {
@@ -246,6 +247,12 @@ static inline header * allocate_object(size_t raw_size) {
     set_state(new, ALLOCATED);
 
     set_size(p, extra_size);
+    //TODO: move free list pointer into a different list
+
+    header *free = get_headerfrom_offset(new, total_size);
+    free->left_size = total_size;
+    set_state(free, UNALLOCATED);
+    return free;
 
   }
   exit(1);
