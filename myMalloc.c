@@ -252,10 +252,9 @@ static inline header * allocate_object(size_t raw_size) {
     header *free = get_header_from_offset(new, total_size);
     free->left_size = total_size;
     set_state(free, UNALLOCATED);
-    return free;
 
   }
-  exit(1);
+  return (header *) new->data;
 }
 
 /**
