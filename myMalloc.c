@@ -226,7 +226,21 @@ static inline header * allocate_object(size_t raw_size) {
 
   size_t total_size = round_s + ALLOC_HEADER_SIZE;
 
-  header *free = find_free(total_size);
+  int i = list_num;
+  header * p = NULL;
+  for (i; i < N_LISTS; i++) {
+    header * freelist = &freelistSentinels[i];
+    if (freelist != freelist->next) {
+      p = freelist->next;
+      break;
+    }
+  }
+
+  assert(p != NULL && get_size(p) >= total_size);
+
+  if (p != NULL && p->size_state >= totalsize) {
+
+  }
   exit(1);
 }
 
