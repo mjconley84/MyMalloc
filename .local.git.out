@@ -1,0 +1,1055 @@
+Your branch is up to date with 'origin/master'.
+On branch master
+Your branch is up to date with 'origin/master'.
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	.local.git.out
+
+nothing added to commit but untracked files present (use "git add" to track)
+Your branch is up to date with 'origin/master'.
+On branch master
+Your branch is up to date with 'origin/master'.
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	.local.git.out
+
+nothing added to commit but untracked files present (use "git add" to track)
+Your branch is up to date with 'origin/master'.
+On branch master
+Your branch is up to date with 'origin/master'.
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	.local.git.out
+	examples/composite_ex
+	examples/constructor_ex
+	tests/test_all_lists
+	tests/test_coalesce_chunk_coalesce
+	tests/test_coalesce_chunk_insert
+	tests/test_corrupted_canary
+	tests/test_double_free
+	tests/test_exact
+	tests/test_free_both
+	tests/test_free_even
+	tests/test_free_insert
+	tests/test_free_left
+	tests/test_free_null
+	tests/test_free_odd
+	tests/test_free_right
+	tests/test_insert_chunk
+	tests/test_large
+	tests/test_locks
+	tests/test_malloc_large
+	tests/test_malloc_too_large
+	tests/test_malloc_zero
+	tests/test_multi_malloc
+	tests/test_out_of_ram
+	tests/test_random
+	tests/test_random_sizes
+	tests/test_simple0
+	tests/test_simple1
+	tests/test_simple2
+	tests/test_simple3
+	tests/test_simple4
+	tests/test_simple5
+	tests/test_simple6
+	tests/test_split
+	tests/test_verify
+	tests/test_very_large
+
+nothing added to commit but untracked files present (use "git add" to track)
+Your branch is up to date with 'origin/master'.
+On branch master
+Your branch is up to date with 'origin/master'.
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	.local.git.out
+	examples/composite_ex
+	examples/constructor_ex
+	tests/test_all_lists
+	tests/test_coalesce_chunk_coalesce
+	tests/test_coalesce_chunk_insert
+	tests/test_corrupted_canary
+	tests/test_double_free
+	tests/test_exact
+	tests/test_free_both
+	tests/test_free_even
+	tests/test_free_insert
+	tests/test_free_left
+	tests/test_free_null
+	tests/test_free_odd
+	tests/test_free_right
+	tests/test_insert_chunk
+	tests/test_large
+	tests/test_locks
+	tests/test_malloc_large
+	tests/test_malloc_too_large
+	tests/test_malloc_zero
+	tests/test_multi_malloc
+	tests/test_out_of_ram
+	tests/test_random
+	tests/test_random_sizes
+	tests/test_simple0
+	tests/test_simple1
+	tests/test_simple2
+	tests/test_simple3
+	tests/test_simple4
+	tests/test_simple5
+	tests/test_simple6
+	tests/test_split
+	tests/test_verify
+	tests/test_very_large
+
+nothing added to commit but untracked files present (use "git add" to track)
+Your branch is up to date with 'origin/master'.
+On branch master
+Your branch is up to date with 'origin/master'.
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	.local.git.out
+	examples/composite_ex
+	examples/constructor_ex
+	tests/test_all_lists
+	tests/test_coalesce_chunk_coalesce
+	tests/test_coalesce_chunk_insert
+	tests/test_corrupted_canary
+	tests/test_double_free
+	tests/test_exact
+	tests/test_free_both
+	tests/test_free_even
+	tests/test_free_insert
+	tests/test_free_left
+	tests/test_free_null
+	tests/test_free_odd
+	tests/test_free_right
+	tests/test_insert_chunk
+	tests/test_large
+	tests/test_locks
+	tests/test_malloc_large
+	tests/test_malloc_too_large
+	tests/test_malloc_zero
+	tests/test_multi_malloc
+	tests/test_out_of_ram
+	tests/test_random
+	tests/test_random_sizes
+	tests/test_simple0
+	tests/test_simple1
+	tests/test_simple2
+	tests/test_simple3
+	tests/test_simple4
+	tests/test_simple5
+	tests/test_simple6
+	tests/test_split
+	tests/test_verify
+	tests/test_very_large
+
+nothing added to commit but untracked files present (use "git add" to track)
+Your branch is up to date with 'origin/master'.
+On branch master
+Your branch is up to date with 'origin/master'.
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	.local.git.out
+	examples/composite_ex
+	examples/constructor_ex
+	tests/test_all_lists
+	tests/test_coalesce_chunk_coalesce
+	tests/test_coalesce_chunk_insert
+	tests/test_corrupted_canary
+	tests/test_double_free
+	tests/test_exact
+	tests/test_free_both
+	tests/test_free_even
+	tests/test_free_insert
+	tests/test_free_left
+	tests/test_free_null
+	tests/test_free_odd
+	tests/test_free_right
+	tests/test_insert_chunk
+	tests/test_large
+	tests/test_locks
+	tests/test_malloc_large
+	tests/test_malloc_too_large
+	tests/test_malloc_zero
+	tests/test_multi_malloc
+	tests/test_out_of_ram
+	tests/test_random
+	tests/test_random_sizes
+	tests/test_simple0
+	tests/test_simple1
+	tests/test_simple2
+	tests/test_simple3
+	tests/test_simple4
+	tests/test_simple5
+	tests/test_simple6
+	tests/test_split
+	tests/test_verify
+	tests/test_very_large
+
+nothing added to commit but untracked files present (use "git add" to track)
+M	myMalloc.c
+Your branch is up to date with 'origin/master'.
+[master 79a3fcd] Commit
+ Committer: Maggie Jane Conley <conley84@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+M	myMalloc.c
+Your branch is up to date with 'origin/master'.
+[master 098b59b] Commit
+ Committer: Maggie Jane Conley <conley84@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 21 insertions(+), 1 deletion(-)
+Your branch is up to date with 'origin/master'.
+On branch master
+Your branch is up to date with 'origin/master'.
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	.local.git.out
+	examples/composite_ex
+	examples/constructor_ex
+	tests/test_all_lists
+	tests/test_coalesce_chunk_coalesce
+	tests/test_coalesce_chunk_insert
+	tests/test_corrupted_canary
+	tests/test_double_free
+	tests/test_exact
+	tests/test_free_both
+	tests/test_free_even
+	tests/test_free_insert
+	tests/test_free_left
+	tests/test_free_null
+	tests/test_free_odd
+	tests/test_free_right
+	tests/test_insert_chunk
+	tests/test_large
+	tests/test_locks
+	tests/test_malloc_large
+	tests/test_malloc_too_large
+	tests/test_malloc_zero
+	tests/test_multi_malloc
+	tests/test_out_of_ram
+	tests/test_random
+	tests/test_random_sizes
+	tests/test_simple0
+	tests/test_simple1
+	tests/test_simple2
+	tests/test_simple3
+	tests/test_simple4
+	tests/test_simple5
+	tests/test_simple6
+	tests/test_split
+	tests/test_verify
+	tests/test_very_large
+
+nothing added to commit but untracked files present (use "git add" to track)
+M	myMalloc.c
+Your branch is up to date with 'origin/master'.
+[master d177c99] Commit
+ Committer: Maggie Jane Conley <conley84@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+Your branch is up to date with 'origin/master'.
+On branch master
+Your branch is up to date with 'origin/master'.
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	.local.git.out
+	examples/composite_ex
+	examples/constructor_ex
+	tests/test_all_lists
+	tests/test_coalesce_chunk_coalesce
+	tests/test_coalesce_chunk_insert
+	tests/test_corrupted_canary
+	tests/test_double_free
+	tests/test_exact
+	tests/test_free_both
+	tests/test_free_even
+	tests/test_free_insert
+	tests/test_free_left
+	tests/test_free_null
+	tests/test_free_odd
+	tests/test_free_right
+	tests/test_insert_chunk
+	tests/test_large
+	tests/test_locks
+	tests/test_malloc_large
+	tests/test_malloc_too_large
+	tests/test_malloc_zero
+	tests/test_multi_malloc
+	tests/test_out_of_ram
+	tests/test_random
+	tests/test_random_sizes
+	tests/test_simple0
+	tests/test_simple1
+	tests/test_simple2
+	tests/test_simple3
+	tests/test_simple4
+	tests/test_simple5
+	tests/test_simple6
+	tests/test_split
+	tests/test_verify
+	tests/test_very_large
+
+nothing added to commit but untracked files present (use "git add" to track)
+M	myMalloc.c
+Your branch is up to date with 'origin/master'.
+[master eb9b67d] Commit
+ Committer: Maggie Jane Conley <conley84@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+Your branch is up to date with 'origin/master'.
+On branch master
+Your branch is up to date with 'origin/master'.
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	.local.git.out
+	examples/composite_ex
+	examples/constructor_ex
+	tests/test_all_lists
+	tests/test_coalesce_chunk_coalesce
+	tests/test_coalesce_chunk_insert
+	tests/test_corrupted_canary
+	tests/test_double_free
+	tests/test_exact
+	tests/test_free_both
+	tests/test_free_even
+	tests/test_free_insert
+	tests/test_free_left
+	tests/test_free_null
+	tests/test_free_odd
+	tests/test_free_right
+	tests/test_insert_chunk
+	tests/test_large
+	tests/test_locks
+	tests/test_malloc_large
+	tests/test_malloc_too_large
+	tests/test_malloc_zero
+	tests/test_multi_malloc
+	tests/test_out_of_ram
+	tests/test_random
+	tests/test_random_sizes
+	tests/test_simple0
+	tests/test_simple1
+	tests/test_simple2
+	tests/test_simple3
+	tests/test_simple4
+	tests/test_simple5
+	tests/test_simple6
+	tests/test_split
+	tests/test_verify
+	tests/test_very_large
+
+nothing added to commit but untracked files present (use "git add" to track)
+M	myMalloc.c
+Your branch is up to date with 'origin/master'.
+[master 04bd31a] Commit
+ Committer: Maggie Jane Conley <conley84@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 35 insertions(+), 3 deletions(-)
+Your branch is up to date with 'origin/master'.
+On branch master
+Your branch is up to date with 'origin/master'.
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	.local.git.out
+	examples/composite_ex
+	examples/constructor_ex
+	tests/test_all_lists
+	tests/test_coalesce_chunk_coalesce
+	tests/test_coalesce_chunk_insert
+	tests/test_corrupted_canary
+	tests/test_double_free
+	tests/test_exact
+	tests/test_free_both
+	tests/test_free_even
+	tests/test_free_insert
+	tests/test_free_left
+	tests/test_free_null
+	tests/test_free_odd
+	tests/test_free_right
+	tests/test_insert_chunk
+	tests/test_large
+	tests/test_locks
+	tests/test_malloc_large
+	tests/test_malloc_too_large
+	tests/test_malloc_zero
+	tests/test_multi_malloc
+	tests/test_out_of_ram
+	tests/test_random
+	tests/test_random_sizes
+	tests/test_simple0
+	tests/test_simple1
+	tests/test_simple2
+	tests/test_simple3
+	tests/test_simple4
+	tests/test_simple5
+	tests/test_simple6
+	tests/test_split
+	tests/test_verify
+	tests/test_very_large
+
+nothing added to commit but untracked files present (use "git add" to track)
+Your branch is up to date with 'origin/master'.
+On branch master
+Your branch is up to date with 'origin/master'.
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	.local.git.out
+	examples/composite_ex
+	examples/constructor_ex
+	tests/test_all_lists
+	tests/test_coalesce_chunk_coalesce
+	tests/test_coalesce_chunk_insert
+	tests/test_corrupted_canary
+	tests/test_double_free
+	tests/test_exact
+	tests/test_free_both
+	tests/test_free_even
+	tests/test_free_insert
+	tests/test_free_left
+	tests/test_free_null
+	tests/test_free_odd
+	tests/test_free_right
+	tests/test_insert_chunk
+	tests/test_large
+	tests/test_locks
+	tests/test_malloc_large
+	tests/test_malloc_too_large
+	tests/test_malloc_zero
+	tests/test_multi_malloc
+	tests/test_out_of_ram
+	tests/test_random
+	tests/test_random_sizes
+	tests/test_simple0
+	tests/test_simple1
+	tests/test_simple2
+	tests/test_simple3
+	tests/test_simple4
+	tests/test_simple5
+	tests/test_simple6
+	tests/test_split
+	tests/test_verify
+	tests/test_very_large
+
+nothing added to commit but untracked files present (use "git add" to track)
+Your branch is up to date with 'origin/master'.
+On branch master
+Your branch is up to date with 'origin/master'.
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	.local.git.out
+	examples/composite_ex
+	examples/constructor_ex
+	tests/test_all_lists
+	tests/test_coalesce_chunk_coalesce
+	tests/test_coalesce_chunk_insert
+	tests/test_corrupted_canary
+	tests/test_double_free
+	tests/test_exact
+	tests/test_free_both
+	tests/test_free_even
+	tests/test_free_insert
+	tests/test_free_left
+	tests/test_free_null
+	tests/test_free_odd
+	tests/test_free_right
+	tests/test_insert_chunk
+	tests/test_large
+	tests/test_locks
+	tests/test_malloc_large
+	tests/test_malloc_too_large
+	tests/test_malloc_zero
+	tests/test_multi_malloc
+	tests/test_out_of_ram
+	tests/test_random
+	tests/test_random_sizes
+	tests/test_simple0
+	tests/test_simple1
+	tests/test_simple2
+	tests/test_simple3
+	tests/test_simple4
+	tests/test_simple5
+	tests/test_simple6
+	tests/test_split
+	tests/test_verify
+	tests/test_very_large
+
+nothing added to commit but untracked files present (use "git add" to track)
+M	myMalloc.c
+Your branch is up to date with 'origin/master'.
+[master 4c7b5fa] Commit
+ Committer: Maggie Jane Conley <conley84@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+Your branch is up to date with 'origin/master'.
+On branch master
+Your branch is up to date with 'origin/master'.
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	.local.git.out
+	examples/composite_ex
+	examples/constructor_ex
+	tests/test_all_lists
+	tests/test_coalesce_chunk_coalesce
+	tests/test_coalesce_chunk_insert
+	tests/test_corrupted_canary
+	tests/test_double_free
+	tests/test_exact
+	tests/test_free_both
+	tests/test_free_even
+	tests/test_free_insert
+	tests/test_free_left
+	tests/test_free_null
+	tests/test_free_odd
+	tests/test_free_right
+	tests/test_insert_chunk
+	tests/test_large
+	tests/test_locks
+	tests/test_malloc_large
+	tests/test_malloc_too_large
+	tests/test_malloc_zero
+	tests/test_multi_malloc
+	tests/test_out_of_ram
+	tests/test_random
+	tests/test_random_sizes
+	tests/test_simple0
+	tests/test_simple1
+	tests/test_simple2
+	tests/test_simple3
+	tests/test_simple4
+	tests/test_simple5
+	tests/test_simple6
+	tests/test_split
+	tests/test_verify
+	tests/test_very_large
+
+nothing added to commit but untracked files present (use "git add" to track)
+Your branch is up to date with 'origin/master'.
+On branch master
+Your branch is up to date with 'origin/master'.
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	.local.git.out
+	examples/composite_ex
+	examples/constructor_ex
+	tests/test_all_lists
+	tests/test_coalesce_chunk_coalesce
+	tests/test_coalesce_chunk_insert
+	tests/test_corrupted_canary
+	tests/test_double_free
+	tests/test_exact
+	tests/test_free_both
+	tests/test_free_even
+	tests/test_free_insert
+	tests/test_free_left
+	tests/test_free_null
+	tests/test_free_odd
+	tests/test_free_right
+	tests/test_insert_chunk
+	tests/test_large
+	tests/test_locks
+	tests/test_malloc_large
+	tests/test_malloc_too_large
+	tests/test_malloc_zero
+	tests/test_multi_malloc
+	tests/test_out_of_ram
+	tests/test_random
+	tests/test_random_sizes
+	tests/test_simple0
+	tests/test_simple1
+	tests/test_simple2
+	tests/test_simple3
+	tests/test_simple4
+	tests/test_simple5
+	tests/test_simple6
+	tests/test_split
+	tests/test_verify
+	tests/test_very_large
+
+nothing added to commit but untracked files present (use "git add" to track)
+Your branch is up to date with 'origin/master'.
+On branch master
+Your branch is up to date with 'origin/master'.
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	.local.git.out
+	examples/composite_ex
+	examples/constructor_ex
+	tests/test_all_lists
+	tests/test_coalesce_chunk_coalesce
+	tests/test_coalesce_chunk_insert
+	tests/test_corrupted_canary
+	tests/test_double_free
+	tests/test_exact
+	tests/test_free_both
+	tests/test_free_even
+	tests/test_free_insert
+	tests/test_free_left
+	tests/test_free_null
+	tests/test_free_odd
+	tests/test_free_right
+	tests/test_insert_chunk
+	tests/test_large
+	tests/test_locks
+	tests/test_malloc_large
+	tests/test_malloc_too_large
+	tests/test_malloc_zero
+	tests/test_multi_malloc
+	tests/test_out_of_ram
+	tests/test_random
+	tests/test_random_sizes
+	tests/test_simple0
+	tests/test_simple1
+	tests/test_simple2
+	tests/test_simple3
+	tests/test_simple4
+	tests/test_simple5
+	tests/test_simple6
+	tests/test_split
+	tests/test_verify
+	tests/test_very_large
+
+nothing added to commit but untracked files present (use "git add" to track)
+M	myMalloc.c
+Your branch is up to date with 'origin/master'.
+[master 2eac85e] Commit
+ Committer: Maggie Jane Conley <conley84@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+Your branch is up to date with 'origin/master'.
+On branch master
+Your branch is up to date with 'origin/master'.
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	.local.git.out
+	examples/composite_ex
+	examples/constructor_ex
+	tests/test_all_lists
+	tests/test_coalesce_chunk_coalesce
+	tests/test_coalesce_chunk_insert
+	tests/test_corrupted_canary
+	tests/test_double_free
+	tests/test_exact
+	tests/test_free_both
+	tests/test_free_even
+	tests/test_free_insert
+	tests/test_free_left
+	tests/test_free_null
+	tests/test_free_odd
+	tests/test_free_right
+	tests/test_insert_chunk
+	tests/test_large
+	tests/test_locks
+	tests/test_malloc_large
+	tests/test_malloc_too_large
+	tests/test_malloc_zero
+	tests/test_multi_malloc
+	tests/test_out_of_ram
+	tests/test_random
+	tests/test_random_sizes
+	tests/test_simple0
+	tests/test_simple1
+	tests/test_simple2
+	tests/test_simple3
+	tests/test_simple4
+	tests/test_simple5
+	tests/test_simple6
+	tests/test_split
+	tests/test_verify
+	tests/test_very_large
+
+nothing added to commit but untracked files present (use "git add" to track)
+M	myMalloc.c
+Your branch is up to date with 'origin/master'.
+[master 10d74bf] Commit
+ Committer: Maggie Jane Conley <conley84@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 8 insertions(+), 11 deletions(-)
+M	myMalloc.c
+Your branch is up to date with 'origin/master'.
+[master b556ed1] Commit
+ Committer: Maggie Jane Conley <conley84@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 7 insertions(+), 9 deletions(-)
+M	myMalloc.c
+Your branch is up to date with 'origin/master'.
+[master 8cf4cee] Commit
+ Committer: Maggie Jane Conley <conley84@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+M	myMalloc.c
+Your branch is up to date with 'origin/master'.
+[master 1e51c84] Commit
+ Committer: Maggie Jane Conley <conley84@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 13 insertions(+), 24 deletions(-)
+M	myMalloc.c
+Your branch is up to date with 'origin/master'.
+[master 79469d1] Commit
+ Committer: Maggie Jane Conley <conley84@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+M	myMalloc.c
+Your branch is up to date with 'origin/master'.
+[master c8abe9f] Commit
+ Committer: Maggie Jane Conley <conley84@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 15 insertions(+), 1 deletion(-)
+M	myMalloc.c
+Your branch is up to date with 'origin/master'.
+[master 924a594] Commit
+ Committer: Maggie Jane Conley <conley84@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+M	myMalloc.c
+Your branch is up to date with 'origin/master'.
+[master 2d347cd] Commit
+ Committer: Maggie Jane Conley <conley84@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 5 insertions(+)
+M	myMalloc.c
+Your branch is up to date with 'origin/master'.
+[master 7e1e93e] Commit
+ Committer: Maggie Jane Conley <conley84@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+M	myMalloc.c
+Your branch is up to date with 'origin/master'.
+[master e52b5f1] Commit
+ Committer: Maggie Jane Conley <conley84@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 2 insertions(+)
+M	myMalloc.c
+Your branch is up to date with 'origin/master'.
+[master 4311ada] Commit
+ Committer: Maggie Jane Conley <conley84@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 7 insertions(+)
+M	myMalloc.c
+Your branch is up to date with 'origin/master'.
+[master d4b9c76] Commit
+ Committer: Maggie Jane Conley <conley84@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+Your branch is up to date with 'origin/master'.
+On branch master
+Your branch is up to date with 'origin/master'.
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	.local.git.out
+	.myMalloc.c.swn
+	.myMalloc.c.swo
+	.myMalloc.c.swp
+	examples/composite_ex
+	examples/constructor_ex
+	tests/test_all_lists
+	tests/test_coalesce_chunk_coalesce
+	tests/test_coalesce_chunk_insert
+	tests/test_corrupted_canary
+	tests/test_double_free
+	tests/test_exact
+	tests/test_free_both
+	tests/test_free_even
+	tests/test_free_insert
+	tests/test_free_left
+	tests/test_free_null
+	tests/test_free_odd
+	tests/test_free_right
+	tests/test_insert_chunk
+	tests/test_large
+	tests/test_locks
+	tests/test_malloc_large
+	tests/test_malloc_too_large
+	tests/test_malloc_zero
+	tests/test_multi_malloc
+	tests/test_out_of_ram
+	tests/test_random
+	tests/test_random_sizes
+	tests/test_simple0
+	tests/test_simple1
+	tests/test_simple2
+	tests/test_simple3
+	tests/test_simple4
+	tests/test_simple5
+	tests/test_simple6
+	tests/test_split
+	tests/test_verify
+	tests/test_very_large
+
+nothing added to commit but untracked files present (use "git add" to track)
+M	myMalloc.c
+Your branch is up to date with 'origin/master'.
+[master 760ff5a] Commit
+ Committer: Maggie Jane Conley <conley84@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+M	myMalloc.c
+Your branch is up to date with 'origin/master'.
+[master 6d7d725] Commit
+ Committer: Maggie Jane Conley <conley84@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+M	myMalloc.c
+Your branch is up to date with 'origin/master'.
+[master 4316694] Commit
+ Committer: Maggie Jane Conley <conley84@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 4 insertions(+), 5 deletions(-)
+Your branch is up to date with 'origin/master'.
+On branch master
+Your branch is up to date with 'origin/master'.
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	.local.git.out
+	.myMalloc.c.swn
+	.myMalloc.c.swo
+
+nothing added to commit but untracked files present (use "git add" to track)
+Your branch is up to date with 'origin/master'.
+On branch master
+Your branch is up to date with 'origin/master'.
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	.local.git.out
+	.myMalloc.c.swn
+	.myMalloc.c.swo
+
+nothing added to commit but untracked files present (use "git add" to track)
