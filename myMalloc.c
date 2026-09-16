@@ -215,8 +215,8 @@ static inline header * allocate_object(size_t raw_size) {
 
   //make sure we are allocating enough bytes
   size_t round_s = ((raw_size + 7) / 8) * 8;
-  if (round_s < sizeof(header)) {
-    round_s = sizeof(header);
+  if (round_s < ALLOC_HEADER_SIZE) {
+    round_s = ALLOC_HEADER_SIZE;
   }
 
   int list_num = round_s / 8 - 1;
@@ -238,9 +238,9 @@ static inline header * allocate_object(size_t raw_size) {
   header *new = NULL;
 
   //TODO: if this is the last list we need to find a different obj
-  assert(p != NULL && get_size(p) >= total_size);
+  assert(p != NULL && get_size(p) > total_size);
 
-  if (p != NULL && p->size_state >= total_size) {
+  if (p != NULL && get_size(p) > total_size) {
     size_t extra_size = get_size(p) - total_size;
     new = get_header_from_offset(p, extra_size);
     set_size(new, total_size);
@@ -252,7 +252,6 @@ static inline header * allocate_object(size_t raw_size) {
 
     header *free = get_header_from_offset(new, total_size);
     free->left_size = total_size;
-    set_state(free, UNALLOCATED);
 
   }
   return (header *) new->data;
