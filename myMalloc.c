@@ -221,12 +221,12 @@ static inline header * allocate_object(size_t raw_size) {
 
   int list_num = round_s / 8 - 1;
   if (list_num >= N_LISTS) {
-    listNum = N_LISTS - 1;
+    list_num = N_LISTS - 1;
   }
 
   size_t total_size = round_s + ALLOC_HEADER_SIZE;
 
-  header *free = find_free(actual_size);
+  header *free = find_free(total_size);
   exit(1);
 }
 
