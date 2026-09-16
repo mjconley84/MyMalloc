@@ -238,7 +238,7 @@ static inline header * allocate_object(size_t raw_size) {
 
   assert(p != NULL && get_size(p) >= total_size);
 
-  if (p != NULL && p->size_state >= totalsize) {
+  if (p != NULL && p->size_state >= total_size) {
 
   }
   exit(1);
