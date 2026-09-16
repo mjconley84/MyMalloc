@@ -249,7 +249,7 @@ static inline header * allocate_object(size_t raw_size) {
     set_size(p, extra_size);
     //TODO: move free list pointer into a different list
 
-    header *free = get_headerfrom_offset(new, total_size);
+    header *free = get_header_from_offset(new, total_size);
     free->left_size = total_size;
     set_state(free, UNALLOCATED);
     return free;
