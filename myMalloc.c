@@ -235,13 +235,14 @@ static inline header * allocate_object(size_t raw_size) {
       break;
     }
   }
+  header *new = NULL;
 
   //TODO: if this is the last list we need to find a different obj
   assert(p != NULL && get_size(p) >= total_size);
 
   if (p != NULL && p->size_state >= total_size) {
     size_t extra_size = get_size(p) - total_size;
-    header *new = get_header_from_offset(p, extra_size);
+    new = get_header_from_offset(p, extra_size);
     set_size(new, total_size);
     new->left_size = extra_size;
     set_state(new, ALLOCATED);
