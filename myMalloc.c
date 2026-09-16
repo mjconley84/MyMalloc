@@ -245,6 +245,8 @@ static inline header * allocate_object(size_t raw_size) {
     new->left_size = extra_size;
     set_state(new, ALLOCATED);
 
+    set_size(p, extra_size);
+
   }
   exit(1);
 }
