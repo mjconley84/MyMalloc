@@ -259,6 +259,7 @@ static inline header * allocate_object(size_t raw_size) {
 
 static inline header * add_to_free_list(header *new) {
   int list_num = get_size(new) / 8 - 1;
+  printf("list_num = %ld", list_num);
   header *freelist = &freelistSentinels[list_num];
   if (freelist != freelist->next) {
     //TODO traverse the list
