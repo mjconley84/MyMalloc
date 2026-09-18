@@ -275,9 +275,7 @@ static inline header * ptr_to_header(void * p) {
  */
 static inline void deallocate_object(void * p) {
   // TODO implement deallocation
-  (void) p;
-  assert(false);
-  exit(1);
+  header *free = get_header_from_offset(p, p->left_size);
 }
 
 /**
