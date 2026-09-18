@@ -1055,3 +1055,20 @@ Untracked files:
 nothing added to commit but untracked files present (use "git add" to track)
 M	myMalloc.c
 Your branch is up to date with 'origin/master'.
+[master 5f383d1] Commit
+ Committer: Maggie Jane Conley <conley84@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 2 files changed, 3 insertions(+), 3 deletions(-)
+M	.local.git.out
+M	myMalloc.c
+Your branch is up to date with 'origin/master'.

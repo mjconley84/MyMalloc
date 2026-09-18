@@ -250,12 +250,15 @@ static inline header * allocate_object(size_t raw_size) {
     set_size(p, extra_size);
     //TODO: move free list pointer into a different list
 
-    header *free = get_header_from_offset(new, total_size);
+    header *free = get_header_from_offset(new, total_s);
     free->left_size = total_size;
 
   }
   return (header *) new->data;
 }
+
+static inline header *coalesse(header *right, header *left) {
+
 
 /**
  * @brief Helper to get the header from a pointer allocated with malloc
@@ -275,7 +278,27 @@ static inline header * ptr_to_header(void * p) {
  */
 static inline void deallocate_object(void * p) {
   // TODO implement deallocation
-  header *free = get_header_from_offset(p, p->left_size);
+  header *free = ptr_to_header(p);
+  header *check_next = get_right_header(free);
+  header *check_prev = get_left_header(free);
+  header *final = NULL;
+
+  //call coalesse with next and previous if those blocks are free
+  if (get_state(check_next) == FREE && get_state(check_prev) == FREE) {
+    header *next_and_free = coalesse(free, check_next);
+    final = coalesse(check_prev, next_and_free);
+  } else if (get_state(check_prev) == FREE) {
+    final = coalesse(check_prev, free);
+  } else if (get_state(check_next == FREE)) {
+    final = coalesse(free, check_next);
+  } else {
+    final = free;
+  }
+  
+  //TODO set the values of final (size, state, left and right pointers)
+
+  //TODO add the free block to the free list
+
 }
 
 /**
