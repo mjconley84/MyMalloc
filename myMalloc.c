@@ -262,12 +262,19 @@ static inline header * add_to_free_list(header *new) {
   header *freelist = &freelistSentinels[list_num];
   if (freelist != freelist->next) {
     //TODO traverse the list
-    freelist->next = new; //this erases the rest of the list
+    header *next_p = freelist;
+    while (!is_sentinal(next_p->next)) {
+      next_p = next_p->next;
+    }
+
+    next_p->next = new; //this erases the rest of the list
+    new->prev = next_p;
+    new->next = freelist;
   }
   else {
-    new->next = SENTINEL;
+    new->next = freelist->next;
     freelist->next = new;
-    new->prev = SENTINEL;
+    new->prev = freelist;
   }
   return new;
 
@@ -301,7 +308,7 @@ static inline void deallocate_object(void * p) {
   // TODO implement deallocation
   header *free = ptr_to_header(p);
   header *check_next = get_right_header(free);
-  header *check_prev = get_left_header(free);
+  header *check_prev = get_left_header(free);i
   header *final = NULL;
 
   //call coalesse with next and previous if those blocks are free
