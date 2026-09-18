@@ -320,7 +320,8 @@ static inline void deallocate_object(void * p) {
   } else if (get_state(check_next) == UNALLOCATED) {
     final = coalesse(free, check_next);
   } else {
-    final = free;
+    final = add_to_free_list(free);
+    
   }
   
   //TODO set the values of final (size, state, left and right pointers)
