@@ -257,10 +257,25 @@ static inline header * allocate_object(size_t raw_size) {
   return (header *) new->data;
 }
 
+static inline header * add_to_free_list(header *new) {
+  int list_num = get_size(new) / 8 - 1;
+  header *freelist = &freelistSentinels[list_num];
+  if (freelist != freelist->next) {
+    //TODO traverse the list
+    freelist->next = new; //this erases the rest of the list
+  }
+  else {
+    new->next = freelist->next;
+    freelist->next = new;
+    new->prev = freelist;
+  }
+  return new;
+
+}
+
 static inline header *coalesse(header *right, header *left) {
-  (void) right;
-  (void) left;
-  exit(1);
+  size_t total_size = get_size(right) + get_size(left);
+  set_size_and_state(right, total_size, UNALLOCATED);
 }
 
 
