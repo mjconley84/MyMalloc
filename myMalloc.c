@@ -276,6 +276,8 @@ static inline header * add_to_free_list(header *new) {
 static inline header *coalesse(header *right, header *left) {
   size_t total_size = get_size(right) + get_size(left);
   set_size_and_state(right, total_size, UNALLOCATED);
+  add_to_free_list(right);
+  return right;
 }
 
 
