@@ -300,6 +300,9 @@ static inline void deallocate_object(void * p) {
   }
   
   //TODO set the values of final (size, state, left and right pointers)
+  set_state(final, UNALLOCATED);
+  final->next = check_next;
+  final->prev = check_prev;
 
   //TODO add the free block to the free list
 
