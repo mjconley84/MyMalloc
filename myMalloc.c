@@ -263,7 +263,7 @@ static inline header * add_to_free_list(header *new) {
   if (freelist != freelist->next) {
     //TODO traverse the list
     header *next_p = freelist;
-    while (!is_sentinal(next_p->next)) {
+    while (next_p->next != &freelistSentinels[list_num]) {
       next_p = next_p->next;
     }
 
