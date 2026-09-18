@@ -308,7 +308,7 @@ static inline void deallocate_object(void * p) {
   // TODO implement deallocation
   header *free = ptr_to_header(p);
   header *check_next = get_right_header(free);
-  header *check_prev = get_left_header(free);i
+  header *check_prev = get_left_header(free);
   header *final = NULL;
 
   //call coalesse with next and previous if those blocks are free
