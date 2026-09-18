@@ -265,9 +265,9 @@ static inline header * add_to_free_list(header *new) {
     freelist->next = new; //this erases the rest of the list
   }
   else {
-    new->next = freelist->next;
+    new->next = SENTINEL;
     freelist->next = new;
-    new->prev = freelist;
+    new->prev = SENTINEL;
   }
   return new;
 
