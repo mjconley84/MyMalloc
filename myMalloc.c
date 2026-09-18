@@ -288,12 +288,12 @@ static inline void deallocate_object(void * p) {
   header *final = NULL;
 
   //call coalesse with next and previous if those blocks are free
-  if (get_state(check_next) == FREE && get_state(check_prev) == UNALLOCATED) {
+  if (get_state(check_next) == UNALLOCATED && get_state(check_prev) == UNALLOCATED) {
     header *next_and_free = coalesse(free, check_next);
     final = coalesse(check_prev, next_and_free);
   } else if (get_state(check_prev) == UNALLOCATED) {
     final = coalesse(check_prev, free);
-  } else if (get_state(check_next == UNALLOCATED)) {
+  } else if (get_state(check_next) == UNALLOCATED) {
     final = coalesse(free, check_next);
   } else {
     final = free;
