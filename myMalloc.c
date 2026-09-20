@@ -304,7 +304,7 @@ static inline void remove_from_freelist(header *head) {
 
 static inline header *coalesse(header *right, header *left) {
   size_t total_size = get_size(right) + get_size(left);
-  //TODO remove old list from the free list
+  //remove old list from the free list
   if (get_state(right) == UNALLOCATED) {
     remove_from_freelist(right);
   }
@@ -313,9 +313,10 @@ static inline header *coalesse(header *right, header *left) {
   }
   
   set_size_and_state(right, total_size, UNALLOCATED);
-  
-
   add_to_free_list(right);
+
+  header *next = get_right_header(right);
+  next->left_size = get_size(right);
   return right;
 }
 
@@ -353,13 +354,13 @@ static inline void deallocate_object(void * p) {
     final = coalesse(free, check_next);
   } else {
     final = add_to_free_list(free);
-    
   }
   
   //TODO set the values of final (size, state, left and right pointers)
   set_state(final, UNALLOCATED);
 
-  //TODO add the free block to the free list
+  // set the left_size pointer for the pointer after the free block
+
 
 }
 
