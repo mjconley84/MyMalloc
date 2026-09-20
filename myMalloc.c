@@ -260,8 +260,9 @@ static inline header * allocate_object(size_t raw_size) {
 static inline header * add_to_free_list(header *new) {
   int list_num = (get_size(new) - ALLOC_HEADER_SIZE) / 8 - 1;
   header *freelist = &freelistSentinels[list_num];
+
+  //traverse the list
   if (freelist != freelist->next) {
-    //TODO traverse the list
     header *next_p = freelist;
     while (next_p->next != &freelistSentinels[list_num]) {
       next_p = next_p->next;
@@ -282,9 +283,38 @@ static inline header * add_to_free_list(header *new) {
 
 }
 
+static inline void remove_from_freelist(header *head) {
+  int list_num = (get_size(head) - ALLOC_HEADER_SIZE) / 8 -1;
+  header *freelist = &freelistSentinels[list_num];
+  header *next = freelist->next;
+
+  //error checking -> make sure that the list is not null
+  if (freelist->next = freelist) {
+    return;
+  }
+
+  while (next != &freelistSentinels[list_num]) {
+    if (next == head) {
+      next->prev = head->prev;
+      next->next = head->next;
+      return;
+    }
+  }
+}
+
 static inline header *coalesse(header *right, header *left) {
   size_t total_size = get_size(right) + get_size(left);
+  //TODO remove old list from the free list
+  if (get_state(right) == UNALLOCATED) {
+    remove_from_freelist(right);
+  }
+  if (get_state(left) == UNALLOCATED) {
+    remove_from_freelist(left);
+  }
+  
   set_size_and_state(right, total_size, UNALLOCATED);
+  
+
   add_to_free_list(right);
   return right;
 }
@@ -343,9 +373,10 @@ static inline header * detect_cycles() {
   for (int i = 0; i < N_LISTS; i++) {
     header * freelist = &freelistSentinels[i];
     for (header * slow = freelist->next, * fast = freelist->next->next; 
-         fast != freelist; 
+         fast != freelist;
          slow = slow->next, fast = fast->next->next) {
       if (slow == fast) {
+        printf("cycle in list %d\n\n\n", i);
         return slow;
       }
     }
