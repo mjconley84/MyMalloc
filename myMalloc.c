@@ -330,7 +330,7 @@ static inline header * allocate_object(size_t raw_size) {
   }
   header *new = NULL;
 
-  //TODO: if this is the last list we need to find a different obj
+  //if this is the last list we need to find a different obj
   if (p == NULL | get_size(p) < total_size) {
     p = allocate_chunk(ARENA_SIZE);
     if (p == NULL) {
@@ -342,18 +342,30 @@ static inline header * allocate_object(size_t raw_size) {
 
   if (p != NULL && get_size(p) >= total_size) {
     size_t extra_size = get_size(p) - total_size;
-    new = get_header_from_offset(p, extra_size);
-    set_size(new, total_size);
-    new->left_size = extra_size;
+    //case 1, the block is exactly the correct size
+    if (get_size(p) == total_size) {
+      new = p;
+      remove_from_freelist(p);
+    //TODO: case 2 the block is bigger, but cannot be split
+    //case 3, the block is bigger and can be split
+    } else {
+      new = get_header_from_offset(p, extra_size);
+      set_size(new, total_size);
+      new->left_size = extra_size;
+      set_size(p, extra_size);
+      add_to_freelist(p);
+    }
     set_state(new, ALLOCATED);
+    add_to_freelist(p);
 
-    set_size(p, extra_size);
-    //TODO: move free list pointer into a different list
-
-    header *free = get_header_from_offset(new, total_size);
-    free->left_size = total_size;
-
+    //update the pointer to the right's left size attribute
+    get_header_from_offset(new, total_size)->left_size = total_size;
   }
+
+  if (get_size(p) == total_size) {
+    new = p;
+    remove_from_freelist(p);
+    set_size(new, total_size);
   return (header *) new->data;
 }
 
