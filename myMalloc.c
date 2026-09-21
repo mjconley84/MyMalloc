@@ -192,22 +192,21 @@ static inline header * add_to_free_list(header *new) {
 
 
 //taeks in the pointer, needs the size
-static inline void remove_from_freelist(header *head) {
-  int list_num = (get_size(head) - ALLOC_HEADER_SIZE) / 8 -1;
+static inline void remove_from_freelist(header *head, int list_num) {
   header *freelist = &freelistSentinels[list_num];
   header *next = freelist->next;
 
-  if (list_num >= N_LISTS) {
-    list_num = N_LISTS - 1;
-  }
-
   //error checking -> make sure that the list is not null
   if (freelist->next = freelist) {
+    printf("there was nothing in the list we are trying to remove\n");
     return;
   }
 
   while (next != &freelistSentinels[list_num]) {
     if (next == head) {
+      if (next == head->next) {
+        printf("they are not being set to sententinels\n");
+      }
       next->prev = head->prev;
       next->next = head->next;
       return;
@@ -219,10 +218,10 @@ static inline header *coalesse(header *right, header *left) {
   size_t total_size = get_size(right) + get_size(left);
   //remove old list from the free list
   if (get_state(right) == UNALLOCATED) {
-    remove_from_freelist(right);
+    //remove_from_freelist(right, list_num);
   }
   if (get_state(left) == UNALLOCATED) {
-    remove_from_freelist(left);
+    //remove_from_freelist(left, list_num);
   }
   
   set_size_and_state(right, total_size, UNALLOCATED);
@@ -351,7 +350,7 @@ static inline header * allocate_object(size_t raw_size) {
     //case 1, the block is exactly the correct size
     if (get_size(p) == total_size || extra_size < sizeof(header)) {
       new = p;
-      remove_from_freelist(p);
+      remove_from_freelist(p, list_num);
     //TODO: case 2 the block is bigger, but cannot be split //might not work
     //case 3, the block is bigger and can be split
     } else {
