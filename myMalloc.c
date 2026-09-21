@@ -242,6 +242,7 @@ static inline header * allocate_object(size_t raw_size) {
     p = allocate_chunk(ARENA_SIZE);
     if (p == NULL) {
       errno = ENOMEM;
+      return NULL;
     }
 
   }
