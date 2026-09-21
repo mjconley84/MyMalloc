@@ -268,6 +268,10 @@ static inline header * add_to_free_list(header *new) {
   int list_num = (get_size(new) - ALLOC_HEADER_SIZE) / 8 - 1;
   header *freelist = &freelistSentinels[list_num];
 
+  if (list_num >= N_LISTS) {
+    list_num = N_LISTS - 1;
+  }
+
   //traverse the list
   if (freelist != freelist->next) {
     header *next_p = freelist;
