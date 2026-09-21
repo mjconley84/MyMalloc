@@ -263,7 +263,6 @@ static header * allocate_chunk(size_t size) {
     hdr = coalesse(hdr, right);
   } else {
     printf("neither were unallocated\n");
-    hdr = add_to_free_list(hdr);
   }
 
 
