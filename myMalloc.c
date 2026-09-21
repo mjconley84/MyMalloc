@@ -353,6 +353,7 @@ static inline header * allocate_object(size_t raw_size) {
       set_size(new, total_size);
       new->left_size = extra_size;
       set_size(p, extra_size);
+      remove_from_freelist(p);
       add_to_free_list(p);
     }
     set_state(new, ALLOCATED);
