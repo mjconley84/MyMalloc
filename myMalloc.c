@@ -190,6 +190,8 @@ static inline header * add_to_free_list(header *new) {
 
 }
 
+
+//taeks in the pointer, needs the size
 static inline void remove_from_freelist(header *head) {
   int list_num = (get_size(head) - ALLOC_HEADER_SIZE) / 8 -1;
   header *freelist = &freelistSentinels[list_num];
@@ -352,8 +354,8 @@ static inline header * allocate_object(size_t raw_size) {
       new = get_header_from_offset(p, extra_size);
       set_size(new, total_size);
       new->left_size = extra_size;
+      remove_from_freelist(p); //must be done before changing the size
       set_size(p, extra_size);
-      remove_from_freelist(p);
       add_to_free_list(p);
     }
     set_state(new, ALLOCATED);
