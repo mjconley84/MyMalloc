@@ -253,13 +253,13 @@ static header * allocate_chunk(size_t size) {
 
   if (get_state(right) == UNALLOCATED && get_state(left) == UNALLOCATED) {
     header *next_and_free = coalesse(hdr, right);
-    final = coalesse(left, next_and_free);
+    hdr = coalesse(left, next_and_free);
   } else if (get_state(left) == UNALLOCATED) {
-    final = coalesse(left, hdr);
+    hdr = coalesse(left, hdr);
   } else if (get_state(right) == UNALLOCATED) {
-    final = coalesse(hdr, right);
+    hdr = coalesse(hdr, right);
   } else {
-    final = add_to_free_list(hdr);
+    hdr = add_to_free_list(hdr);
   }
 
 
