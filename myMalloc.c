@@ -356,7 +356,7 @@ static inline header * allocate_object(size_t raw_size) {
       add_to_free_list(p);
     }
     set_state(new, ALLOCATED);
-    add_to_freelist(p);
+    add_to_free_list(p);
 
     //update the pointer to the right's left size attribute
     get_header_from_offset(new, total_size)->left_size = total_size;
