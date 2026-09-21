@@ -241,7 +241,7 @@ static inline header * allocate_object(size_t raw_size) {
   if (p != NULL && get_size(p) > total_size) {
     p = allocate_chunk(ARENA_SIZE);
     if (p == NULL) {
-      return ENOMEM;
+      return void *(ENOMEM);
     }
 
   }
