@@ -340,7 +340,7 @@ static inline header * allocate_object(size_t raw_size) {
 
   }
 
-  if (p != NULL && get_size(p) > total_size) {
+  if (p != NULL && get_size(p) >= total_size) {
     size_t extra_size = get_size(p) - total_size;
     new = get_header_from_offset(p, extra_size);
     set_size(new, total_size);
