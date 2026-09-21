@@ -251,14 +251,14 @@ static header * allocate_chunk(size_t size) {
   set_size(hdr, size - 2 * ALLOC_HEADER_SIZE);
   hdr->left_size = ALLOC_HEADER_SIZE;
 
-  if (get_state(right) == UNALLOCATED && get_state(left) == UNALLOCATED) {
+  if ((get_state(right) == UNALLOCATED || get_state(right) == FENCEPOST) && (get_state(left) == UNALLOCATED) || (get_state(left) == FENCEPOST)) {
     printf("both were unallocated\n");
     header *next_and_free = coalesse(hdr, right);
     hdr = coalesse(left, next_and_free);
-  } else if (get_state(left) == UNALLOCATED) {
+  } else if (get_state(left) == UNALLOCATED || get_state(left) == FENCEPOST) {
     printf("left is unallocated\n");
     hdr = coalesse(left, hdr);
-  } else if (get_state(right) == UNALLOCATED) {
+  } else if (get_state(right) == UNALLOCATED || get_state(right) == FENCEPOST) {
     printf("right is unallocated\n");
     hdr = coalesse(hdr, right);
   } else {
