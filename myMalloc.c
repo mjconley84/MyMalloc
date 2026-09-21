@@ -345,10 +345,10 @@ static inline header * allocate_object(size_t raw_size) {
   if (p != NULL && get_size(p) >= total_size) {
     size_t extra_size = get_size(p) - total_size;
     //case 1, the block is exactly the correct size
-    if (get_size(p) == total_size) {
+    if (get_size(p) == total_size || extra_size < sizeof(header)) {
       new = p;
       remove_from_freelist(p);
-    //TODO: case 2 the block is bigger, but cannot be split
+    //TODO: case 2 the block is bigger, but cannot be split //might not work
     //case 3, the block is bigger and can be split
     } else {
       new = get_header_from_offset(p, extra_size);
