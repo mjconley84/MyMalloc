@@ -197,6 +197,11 @@ static inline void remove_from_freelist(header *head) {
   header *freelist = &freelistSentinels[list_num];
   header *next = freelist->next;
 
+  if (list_num >= N_LISTS) {
+    list_num = N_LISTS - 1;
+  }
+  printf("list_num in remove is: %d\n", list_num);
+
   //error checking -> make sure that the list is not null
   if (freelist->next = freelist) {
     return;
@@ -354,12 +359,9 @@ static inline header * allocate_object(size_t raw_size) {
       new = get_header_from_offset(p, extra_size);
       set_size(new, total_size);
       new->left_size = extra_size;
-      remove_from_freelist(p); //must be done before changing the size
       set_size(p, extra_size);
-      add_to_free_list(p);
     }
     set_state(new, ALLOCATED);
-    add_to_free_list(p);
 
     //update the pointer to the right's left size attribute
     get_header_from_offset(new, total_size)->left_size = total_size;
