@@ -200,7 +200,6 @@ static inline void remove_from_freelist(header *head) {
   if (list_num >= N_LISTS) {
     list_num = N_LISTS - 1;
   }
-  printf("list_num in remove is: %d\n", list_num);
 
   //error checking -> make sure that the list is not null
   if (freelist->next = freelist) {
