@@ -158,6 +158,79 @@ inline static void insert_fenceposts(void * raw_mem, size_t size) {
   initialize_fencepost(rightFencePost, size - 2 * ALLOC_HEADER_SIZE);
 }
 
+
+
+static inline header * add_to_free_list(header *new) {
+  int list_num = (get_size(new) - ALLOC_HEADER_SIZE) / 8 - 1;
+  header *freelist = &freelistSentinels[list_num];
+
+  if (list_num >= N_LISTS) {
+    list_num = N_LISTS - 1;
+  }
+
+  //traverse the list
+  if (freelist != freelist->next) {
+    header *next_p = freelist;
+    while (next_p->next != &freelistSentinels[list_num]) {
+      next_p = next_p->next;
+    }
+
+    next_p->next = new;
+    new->prev = next_p;
+    new->next = freelist;
+    freelist->prev = new;
+  }
+  else {
+    new->next = freelist->next;
+    freelist->next = new;
+    new->prev = freelist;
+    freelist->prev = new;
+  }
+  return new;
+
+}
+
+static inline void remove_from_freelist(header *head) {
+  int list_num = (get_size(head) - ALLOC_HEADER_SIZE) / 8 -1;
+  header *freelist = &freelistSentinels[list_num];
+  header *next = freelist->next;
+
+  //error checking -> make sure that the list is not null
+  if (freelist->next = freelist) {
+    return;
+  }
+
+  while (next != &freelistSentinels[list_num]) {
+    if (next == head) {
+      next->prev = head->prev;
+      next->next = head->next;
+      return;
+    }
+  }
+}
+
+static inline header *coalesse(header *right, header *left) {
+  size_t total_size = get_size(right) + get_size(left);
+  //remove old list from the free list
+  if (get_state(right) == UNALLOCATED) {
+    remove_from_freelist(right);
+  }
+  if (get_state(left) == UNALLOCATED) {
+    remove_from_freelist(left);
+  }
+  
+  set_size_and_state(right, total_size, UNALLOCATED);
+  add_to_free_list(right);
+
+  header *next = get_right_header(right);
+  next->left_size = get_size(right);
+  return right;
+}
+
+
+
+
+
 /**
  * @brief Allocate another chunk from the OS and prepare to insert it
  * into the free list
@@ -169,12 +242,27 @@ inline static void insert_fenceposts(void * raw_mem, size_t size) {
  */
 static header * allocate_chunk(size_t size) {
   void * mem = sbrk(size);
+  header *right = get_right_header(mem);
+  header *left = get_left_header(mem);
   
   insert_fenceposts(mem, size);
   header * hdr = (header *) ((char *)mem + ALLOC_HEADER_SIZE);
   set_state(hdr, UNALLOCATED);
   set_size(hdr, size - 2 * ALLOC_HEADER_SIZE);
   hdr->left_size = ALLOC_HEADER_SIZE;
+
+  if (get_state(right) == UNALLOCATED && get_state(left) == UNALLOCATED) {
+    header *next_and_free = coalesse(hdr, right);
+    final = coalesse(left, next_and_free);
+  } else if (get_state(left) == UNALLOCATED) {
+    final = coalesse(left, hdr);
+  } else if (get_state(right) == UNALLOCATED) {
+    final = coalesse(hdr, right);
+  } else {
+    final = add_to_free_list(hdr);
+  }
+
+
   return hdr;
 }
 
@@ -263,74 +351,6 @@ static inline header * allocate_object(size_t raw_size) {
   }
   return (header *) new->data;
 }
-
-static inline header * add_to_free_list(header *new) {
-  int list_num = (get_size(new) - ALLOC_HEADER_SIZE) / 8 - 1;
-  header *freelist = &freelistSentinels[list_num];
-
-  if (list_num >= N_LISTS) {
-    list_num = N_LISTS - 1;
-  }
-
-  //traverse the list
-  if (freelist != freelist->next) {
-    header *next_p = freelist;
-    while (next_p->next != &freelistSentinels[list_num]) {
-      next_p = next_p->next;
-    }
-
-    next_p->next = new;
-    new->prev = next_p;
-    new->next = freelist;
-    freelist->prev = new;
-  }
-  else {
-    new->next = freelist->next;
-    freelist->next = new;
-    new->prev = freelist;
-    freelist->prev = new;
-  }
-  return new;
-
-}
-
-static inline void remove_from_freelist(header *head) {
-  int list_num = (get_size(head) - ALLOC_HEADER_SIZE) / 8 -1;
-  header *freelist = &freelistSentinels[list_num];
-  header *next = freelist->next;
-
-  //error checking -> make sure that the list is not null
-  if (freelist->next = freelist) {
-    return;
-  }
-
-  while (next != &freelistSentinels[list_num]) {
-    if (next == head) {
-      next->prev = head->prev;
-      next->next = head->next;
-      return;
-    }
-  }
-}
-
-static inline header *coalesse(header *right, header *left) {
-  size_t total_size = get_size(right) + get_size(left);
-  //remove old list from the free list
-  if (get_state(right) == UNALLOCATED) {
-    remove_from_freelist(right);
-  }
-  if (get_state(left) == UNALLOCATED) {
-    remove_from_freelist(left);
-  }
-  
-  set_size_and_state(right, total_size, UNALLOCATED);
-  add_to_free_list(right);
-
-  header *next = get_right_header(right);
-  next->left_size = get_size(right);
-  return right;
-}
-
 
 /**
  * @brief Helper to get the header from a pointer allocated with malloc
