@@ -224,13 +224,13 @@ static inline header *coalesse(header *right, header *left) {
  */
 static header * allocate_chunk(size_t size) {
   void * mem = sbrk(size);
-  bool coalesse = false;
+  bool lastfence = false;
   if (lastFencePost != NULL) {
     if (get_left_header(mem) == lastFencePost) {
       header *prev = get_left_header(lastFencePost);
       mem = coalesse(lastFencePost, mem);
       mem = coalesse(prev, mem);
-      coalesse = true;
+      lastfence = true;
     }
   }
 
@@ -255,7 +255,7 @@ static header * allocate_chunk(size_t size) {
   set_state(hdr, UNALLOCATED);
   set_size(hdr, size - 2 * ALLOC_HEADER_SIZE);
   hdr->left_size = ALLOC_HEADER_SIZE;
-  if (coalesse) {
+  if (lastfence) {
     lastFencePost = get_right_header(hdr);
   }
 
