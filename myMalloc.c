@@ -168,24 +168,12 @@ static inline header * add_to_free_list(header *new) {
     list_num = N_LISTS - 1;
   }
 
-  //traverse the list
-  if (freelist != freelist->next) {
-    header *next_p = freelist;
-    while (next_p->next != &freelistSentinels[list_num]) {
-      next_p = next_p->next;
-    }
+  new->next = freelist->next;
+  new->prev = freelist->prev;
+  freelist->next->prev = new;
+  freelist->prev->next = new;
 
-    next_p->next = new;
-    new->prev = next_p;
-    new->next = freelist;
-    freelist->prev = new;
-  }
-  else {
-    new->next = freelist->next;
-    freelist->next = new;
-    new->prev = freelist;
-    freelist->prev = new;
-  }
+  &freelistSentinels[list_num] = new;
   return new;
 
 }
