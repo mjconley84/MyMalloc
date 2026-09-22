@@ -198,15 +198,11 @@ static inline void remove_from_freelist(header *head, int list_num) {
 
   //error checking -> make sure that the list is not null
   if (freelist->next = freelist) {
-    printf("there was nothing in the list we are trying to remove\n");
     return;
   }
 
   while (next != &freelistSentinels[list_num]) {
     if (next == head) {
-      if (next == head->next) {
-        printf("they are not being set to sententinels\n");
-      }
       next->prev = head->prev;
       next->next = head->next;
       return;
