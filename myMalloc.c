@@ -224,25 +224,24 @@ static inline header *coalesse(header *right, header *left) {
  */
 static header * allocate_chunk(size_t size) {
   void * mem = sbrk(size);
-  /* header *right = get_right_header(mem);
+  header *right = get_right_header(mem);
   header *left = get_left_header(mem);
 
-  if ((get_state(right) == UNALLOCATED || get_state(right) == FENCEPOST) &&
-    (get_state(left) == UNALLOCATED) || (get_state(left) == FENCEPOST)) {
+  //deleted fencepost from the checker
+  if ((get_state(right) == UNALLOCATED) &&
+    (get_state(left) == UNALLOCATED)) {
     printf("both were unallocated\n");
     header *next_and_free = coalesse(mem, right);
     mem = coalesse(left, next_and_free);
-  } else if (get_state(left) == UNALLOCATED || get_state(left) == FENCEPOST) {
+  } else if (get_state(left) == UNALLOCATED) {
     printf("left is unallocated\n");
     mem = coalesse(left, mem);
-  } else if (get_state(right) == UNALLOCATED || get_state(right) == FENCEPOST) {
+  } else if (get_state(right) == UNALLOCATED) {
     printf("right is unallocated\n");
     mem = coalesse(mem, right);
   } else {
     printf("neither were unallocated\n");
   } 
-
-  */
   
   insert_fenceposts(mem, size);
   header * hdr = (header *) ((char *)mem + ALLOC_HEADER_SIZE);
