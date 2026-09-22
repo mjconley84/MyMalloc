@@ -219,14 +219,14 @@ static inline header *coalesse(header *right, header *left) {
   int list_num = 0;
   //remove old list from the free list
   if (get_state(right) == UNALLOCATED) {
-    list_num =  round_s / 8 - 1;
+    list_num = (get_size(right)  - ALLOC_HEADER_SIZE) / 8 - 1;
     if (list_num >= N_LISTS) {
        list_num = N_LISTS - 1;
     }
     remove_from_freelist(right, list_num);
   }
   if (get_state(left) == UNALLOCATED) {
-    list_num = round_s / 8 - 1;
+    list_num = (get_size(left) - ALLOC_HEADER_SIZE) / 8 - 1;
     if (list_num >= N_LISTS) {
       list_num = N_LISTS - 1;
     }
