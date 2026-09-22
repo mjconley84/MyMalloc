@@ -169,13 +169,10 @@ static inline header * add_to_free_list(header *new) {
   }
 
   new->next = freelist->next;
-  new->prev = freelist->prev;
+  new->prev = freelist;
   freelist->next->prev = new;
-  freelist->prev->next = new;
-
-  &freelistSentinels[list_num] = new;
+  freelist->next = new;
   return new;
-
 }
 
 
