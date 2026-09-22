@@ -324,7 +324,7 @@ static inline header * allocate_object(size_t raw_size) {
   //if this is the last list we need to find a different obj
   if (p == NULL || get_size(p) < total_size) {
     p = allocate_chunk(ARENA_SIZE);
-    add_to_free_list(p);
+    p = add_to_free_list(p);
     if (p == NULL) {
       errno = ENOMEM;
       return NULL;
