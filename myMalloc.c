@@ -188,8 +188,8 @@ static inline void remove_from_freelist(header *head, int list_num) {
 
   while (next != &freelistSentinels[list_num]) {
     if (next == head) {
-      next->prev = head->prev;
-      next->next = head->next;
+      next->prev->next = head->next;
+      next->next->prev = head->prev;
       return;
     }
   }
@@ -409,6 +409,7 @@ static inline void deallocate_object(void * p) {
 static inline header * detect_cycles() {
   for (int i = 0; i < N_LISTS; i++) {
     header * freelist = &freelistSentinels[i];
+    printf("i = %d\n", i);
     for (header * slow = freelist->next, * fast = freelist->next->next; 
          fast != freelist;
          slow = slow->next, fast = fast->next->next) {
