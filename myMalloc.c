@@ -324,7 +324,15 @@ static inline header * allocate_object(size_t raw_size) {
   //if this is the last list we need to find a different obj
   if (p == NULL || get_size(p) < total_size) {
     p = allocate_chunk(ARENA_SIZE);
+    if (p == NULL) {
+      errno = ENOMEM;
+      return NULL;
+    }
     p = add_to_free_list(p);
+
+    header * prevFencePost = get_header_from_offset(p, -ALLOC_HEADER_SIZE);
+    insert_os_chunk(prevFencePost);
+
     if (p == NULL) {
       errno = ENOMEM;
       return NULL;
