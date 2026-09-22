@@ -182,7 +182,7 @@ static inline void remove_from_freelist(header *head, int list_num) {
   header *next = freelist->next;
 
   //error checking -> make sure that the list is not null
-  if (freelist->next = freelist) {
+  if (freelist->next == freelist) {
     return;
   }
 
