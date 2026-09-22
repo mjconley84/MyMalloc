@@ -216,12 +216,21 @@ static inline void remove_from_freelist(header *head, int list_num) {
 
 static inline header *coalesse(header *right, header *left) {
   size_t total_size = get_size(right) + get_size(left);
+  int list_num = 0;
   //remove old list from the free list
   if (get_state(right) == UNALLOCATED) {
-    //remove_from_freelist(right, list_num);
+    list_num =  round_s / 8 - 1;
+    if (list_num >= N_LISTS) {
+       list_num = N_LISTS - 1;
+    }
+    remove_from_freelist(right, list_num);
   }
   if (get_state(left) == UNALLOCATED) {
-    //remove_from_freelist(left, list_num);
+    list_num = round_s / 8 - 1;
+    if (list_num >= N_LISTS) {
+      list_num = N_LISTS - 1;
+    }
+    remove_from_freelist(left, list_num);
   }
   
   set_size_and_state(right, total_size, UNALLOCATED);
