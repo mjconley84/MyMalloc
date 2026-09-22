@@ -363,6 +363,11 @@ static inline header * ptr_to_header(void * p) {
 static inline void deallocate_object(void * p) {
   // TODO implement deallocation
   header *free = ptr_to_header(p);
+
+  //TODO check if there are other cases in which we cannot free
+  if (p == NULL) {
+    return;
+  }
   header *check_next = get_right_header(free);
   header *check_prev = get_left_header(free);
   header *final = NULL;
