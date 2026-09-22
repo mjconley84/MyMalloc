@@ -162,11 +162,11 @@ inline static void insert_fenceposts(void * raw_mem, size_t size) {
 
 static inline header * add_to_free_list(header *new) {
   int list_num = (get_size(new) - ALLOC_HEADER_SIZE) / 8 - 1;
-  header *freelist = &freelistSentinels[list_num];
 
   if (list_num >= N_LISTS) {
     list_num = N_LISTS - 1;
   }
+  header *freelist = &freelistSentinels[list_num];
 
   new->next = freelist->next;
   new->prev = freelist;
@@ -178,21 +178,8 @@ static inline header * add_to_free_list(header *new) {
 
 //taeks in the pointer, needs the size
 static inline void remove_from_freelist(header *head, int list_num) {
-  header *freelist = &freelistSentinels[list_num];
-  header *next = freelist->next;
-
-  //error checking -> make sure that the list is not null
-  if (freelist->next == freelist) {
-    return;
-  }
-
-  while (next != &freelistSentinels[list_num]) {
-    if (next == head) {
-      next->prev->next = head->next;
-      next->next->prev = head->prev;
-      return;
-    }
-  }
+  head->prev->next = head->next;
+  head->next->prev = head->prev;
 }
 
 static inline header *coalesse(header *right, header *left) {
