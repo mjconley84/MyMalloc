@@ -762,6 +762,8 @@ void freelist_print(printFormatter pf) {
   for (size_t i = 0; i < N_LISTS; i++) {
     header * freelist = &freelistSentinels[i];
     if (freelist->next != freelist) {
+      printf("L%zu: ", i);
+      print_sublist(pf, freelist->next, freelist);
       puts("");
     }
     fflush(stdout);
