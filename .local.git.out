@@ -3482,3 +3482,8 @@ After doing this, you may fix the identity used for this commit with:
     git commit --amend --reset-author
 
  1 file changed, 16 insertions(+)
+M	expectedoutput.txt
+M	myMalloc.c
+M	tests/test_simple5
+Your branch is ahead of 'origin/master' by 1 commit.
+  (use "git push" to publish your local commits)
