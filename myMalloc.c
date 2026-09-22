@@ -396,8 +396,6 @@ static inline void deallocate_object(void * p) {
 static inline header * detect_cycles() {
   for (int i = 0; i < N_LISTS; i++) {
     header * freelist = &freelistSentinels[i];
-    printf("i = %d\n", i); //REMOVE WHEN DONE
-    print_list(freelist);
     for (header * slow = freelist->next, * fast = freelist->next->next; 
          fast != freelist;
          slow = slow->next, fast = fast->next->next) {
