@@ -1,0 +1,296 @@
+TEST: test_simple4.c
+INTIAL STATE
+
+FREELIST
+L58: [
+        addr: 0016
+        size: 992
+        left_size: 16
+        allocated: false
+        prev: SENTINEL
+        next: SENTINEL
+]
+
+TAGS
+[
+        addr: 0000
+        size: 16
+        left_size: 16
+        allocated: fencepost
+]
+[
+        addr: 0016
+        size: 992
+        left_size: 16
+        allocated: false
+        prev: SENTINEL
+        next: SENTINEL
+]
+[
+        addr: 1008
+        size: 16
+        left_size: 992
+        allocated: fencepost
+]
+Before any allocation
+[
+        addr: 0000
+        size: 16
+        left_size: 16
+        allocated: fencepost
+]
+[
+        addr: 0016
+        size: 992
+        left_size: 16
+        allocated: false
+        prev: SENTINEL
+        next: SENTINEL
+]
+[
+        addr: 1008
+        size: 16
+        left_size: 992
+        allocated: fencepost
+]
+mallocing 8 bytes
+[F][U][A][F]
+mem1 = malloc(8)
+[
+        addr: 0000
+        size: 16
+        left_size: 16
+        allocated: fencepost
+]
+[
+        addr: 0016
+        size: 960
+        left_size: 16
+        allocated: false
+        prev: SENTINEL
+        next: SENTINEL
+]
+[
+        addr: 0976
+        size: 32
+        left_size: 960
+        allocated: true
+]
+[
+        addr: 1008
+        size: 16
+        left_size: 32
+        allocated: fencepost
+]
+mallocing 8 bytes
+[F][U][A][A][F]
+mem2 = malloc(8)
+[
+        addr: 0000
+        size: 16
+        left_size: 16
+        allocated: fencepost
+]
+[
+        addr: 0016
+        size: 928
+        left_size: 16
+        allocated: false
+        prev: SENTINEL
+        next: SENTINEL
+]
+[
+        addr: 0944
+        size: 32
+        left_size: 928
+        allocated: true
+]
+[
+        addr: 0976
+        size: 32
+        left_size: 32
+        allocated: true
+]
+[
+        addr: 1008
+        size: 16
+        left_size: 32
+        allocated: fencepost
+]
+mallocing 8 bytes
+[F][U][A][A][A][F]
+mem3 = malloc(8)
+[
+        addr: 0000
+        size: 16
+        left_size: 16
+        allocated: fencepost
+]
+[
+        addr: 0016
+        size: 896
+        left_size: 16
+        allocated: false
+        prev: SENTINEL
+        next: SENTINEL
+]
+[
+        addr: 0912
+        size: 32
+        left_size: 896
+        allocated: true
+]
+[
+        addr: 0944
+        size: 32
+        left_size: 32
+        allocated: true
+]
+[
+        addr: 0976
+        size: 32
+        left_size: 32
+        allocated: true
+]
+[
+        addr: 1008
+        size: 16
+        left_size: 32
+        allocated: fencepost
+]
+freeing 8 bytes (0928)
+[F][U][A][U][A][F]
+free(mem2))
+[
+        addr: 0000
+        size: 16
+        left_size: 16
+        allocated: fencepost
+]
+[
+        addr: 0016
+        size: 896
+        left_size: 16
+        allocated: false
+        prev: SENTINEL
+        next: SENTINEL
+]
+[
+        addr: 0912
+        size: 32
+        left_size: 896
+        allocated: true
+]
+[
+        addr: 0944
+        size: 32
+        left_size: 32
+        allocated: false
+        prev: SENTINEL
+        next: SENTINEL
+]
+[
+        addr: 0976
+        size: 32
+        left_size: 32
+        allocated: true
+]
+[
+        addr: 1008
+        size: 16
+        left_size: 32
+        allocated: fencepost
+]
+freeing 8 bytes (0960)
+[F][U][A][U][F]
+free(mem1))
+[
+        addr: 0000
+        size: 16
+        left_size: 16
+        allocated: fencepost
+]
+[
+        addr: 0016
+        size: 896
+        left_size: 16
+        allocated: false
+        prev: SENTINEL
+        next: SENTINEL
+]
+[
+        addr: 0912
+        size: 32
+        left_size: 896
+        allocated: true
+]
+[
+        addr: 0944
+        size: 64
+        left_size: 32
+        allocated: false
+        prev: SENTINEL
+        next: SENTINEL
+]
+[
+        addr: 1008
+        size: 16
+        left_size: 64
+        allocated: fencepost
+]
+FINAL STATE
+
+FREELIST
+L5: [
+        addr: 0944
+        size: 64
+        left_size: 32
+        allocated: false
+        prev: SENTINEL
+        next: SENTINEL
+]
+
+L58: [
+        addr: 0016
+        size: 896
+        left_size: 16
+        allocated: false
+        prev: SENTINEL
+        next: SENTINEL
+]
+
+TAGS
+[
+        addr: 0000
+        size: 16
+        left_size: 16
+        allocated: fencepost
+]
+[
+        addr: 0016
+        size: 896
+        left_size: 16
+        allocated: false
+        prev: SENTINEL
+        next: SENTINEL
+]
+[
+        addr: 0912
+        size: 32
+        left_size: 896
+        allocated: true
+]
+[
+        addr: 0944
+        size: 64
+        left_size: 32
+        allocated: false
+        prev: SENTINEL
+        next: SENTINEL
+]
+[
+        addr: 1008
+        size: 16
+        left_size: 64
+        allocated: fencepost
+]
