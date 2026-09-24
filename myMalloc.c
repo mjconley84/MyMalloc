@@ -251,26 +251,22 @@ static header * allocate_chunk(size_t size) {
   } else {
     printf("neither were unallocated\n");
   } */
-  
+
+  //set up new fenceposts and the hdr
   insert_fenceposts(mem, size);
   header * hdr = (header *) ((char *)mem + ALLOC_HEADER_SIZE);
-
+  set_state(hdr, UNALLOCATED);
+  set_size(hdr, size - 2 * ALLOC_HEADER_SIZE);
+  hdr->left_size = ALLOC_HEADER_SIZE;
+  
   if (lastFencePost != NULL) {
     header *oldFencePost = get_left_header(get_left_header(hdr));
     if (oldFencePost == lastFencePost) {
       header *prev = get_left_header(hdr);
       prev = coalesse(lastFencePost, prev);
       hdr = coalesse(prev, hdr);
-      lastfence = true;
+      lastFencePost = get_right_header(hdr);
     }
-  }
-  if (lastfence) {
-    lastFencePost = get_right_header(hdr);
-  }
-  else {
-    set_state(hdr, UNALLOCATED);
-    set_size(hdr, size - 2 * ALLOC_HEADER_SIZE);
-    hdr->left_size = ALLOC_HEADER_SIZE;
   }
 
   return hdr;
