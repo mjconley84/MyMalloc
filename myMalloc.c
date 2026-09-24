@@ -270,9 +270,9 @@ static header * allocate_chunk(size_t size) {
   
   if (lastFencePost != NULL) {
     add_to_free_list(hdr);
-    header *oldFencePost = get_left_header(get_left_header(hdr));
+    header *prev = get_left_header(hdr);
+    header *oldFencePost = get_left_header(prev);
     if (oldFencePost == lastFencePost) {
-      header *prev = get_left_header(hdr);
       prev = coalesse(lastFencePost, prev);
       hdr = coalesse(prev, hdr);
       lastFencePost = get_right_header(hdr);
