@@ -276,7 +276,7 @@ static header * allocate_chunk(size_t size) {
       header *prev_free = NULL;
       prev = coalesse(lastFencePost, prev);
       hdr = coalesse(prev, hdr);
-      prev_free = get_right_header(hdr);
+      prev_free = get_left_header(hdr);
       if (get_state(prev_free) == UNALLOCATED) {
         hdr = coalesse(prev_free, hdr);
       }
