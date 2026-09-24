@@ -270,7 +270,6 @@ static header * allocate_chunk(size_t size) {
     header *oldFencePost = get_left_header(get_left_header(hdr));
     if (oldFencePost == lastFencePost) {
       header *prev = get_left_header(hdr);
-      add
       prev = coalesse(lastFencePost, prev);
       hdr = coalesse(prev, hdr);
       lastFencePost = get_right_header(hdr);
@@ -362,7 +361,7 @@ static inline header * allocate_object(size_t raw_size) {
     //case 1, the block is exactly the correct size
     if (get_size(p) == total_size || extra_size < sizeof(header)) {
       new = p;
-      remove_from_freelist(p, list_num);
+      remove_from_freelist(p);
     //TODO: case 2 the block is bigger, but cannot be split //might not work
     //case 3, the block is bigger and can be split
     } else {
