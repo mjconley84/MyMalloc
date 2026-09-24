@@ -187,6 +187,7 @@ static inline header *coalesse(header *right, header *left) {
   int list_num = 0;
   int right_state = get_state(right);
   int left_state = get_state(left);
+
   //remove old list from the free list
   if (right_state == UNALLOCATED) {
     list_num = (get_size(right)  - ALLOC_HEADER_SIZE) / 8 - 1;
@@ -202,9 +203,11 @@ static inline header *coalesse(header *right, header *left) {
     }
     remove_from_freelist(left, list_num);
   }
-  
+
   set_size_and_state(right, total_size, UNALLOCATED);
-  add_to_free_list(right);
+  if (right_state != FENCEPOST && left_state != FENCEPOST) {
+    add_to_free_list(right);
+  }
 
   header *next = get_right_header(left);
   next->left_size = get_size(right);
