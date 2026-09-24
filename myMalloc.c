@@ -263,6 +263,7 @@ static header * allocate_chunk(size_t size) {
   hdr->left_size = ALLOC_HEADER_SIZE;
   
   if (lastFencePost != NULL) {
+    add_to_free_list(hdr);
     header *oldFencePost = get_left_header(get_left_header(hdr));
     if (oldFencePost == lastFencePost) {
       header *prev = get_left_header(hdr);
@@ -341,7 +342,6 @@ static inline header * allocate_object(size_t raw_size) {
       errno = ENOMEM;
       return NULL;
     }
-    p = add_to_free_list(p);
 
     header * prevFencePost = get_header_from_offset(p, -ALLOC_HEADER_SIZE);
     insert_os_chunk(prevFencePost);
