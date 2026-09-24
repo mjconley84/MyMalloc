@@ -177,7 +177,10 @@ static inline header * add_to_free_list(header *new) {
 
 
 //taeks in the pointer, needs the size
-static inline void remove_from_freelist(header *head, int list_num) {
+static inline void remove_from_freelist(header *head) {
+  if (head == NULL || head->prev == NULL || head->next == NULL) {
+    return;
+  }
   head->prev->next = head->next;
   head->next->prev = head->prev;
 }
@@ -194,14 +197,14 @@ static inline header *coalesse(header *right, header *left) {
     if (list_num >= N_LISTS) {
        list_num = N_LISTS - 1;
     }
-    remove_from_freelist(right, list_num);
+    remove_from_freelist(right);
   }
   if (left_state == UNALLOCATED) {
     list_num = (get_size(left) - ALLOC_HEADER_SIZE) / 8 - 1;
     if (list_num >= N_LISTS) {
       list_num = N_LISTS - 1;
     }
-    remove_from_freelist(left, list_num);
+    remove_from_freelist(left);
   }
 
   set_size_and_state(right, total_size, UNALLOCATED);
@@ -267,6 +270,7 @@ static header * allocate_chunk(size_t size) {
     header *oldFencePost = get_left_header(get_left_header(hdr));
     if (oldFencePost == lastFencePost) {
       header *prev = get_left_header(hdr);
+      add
       prev = coalesse(lastFencePost, prev);
       hdr = coalesse(prev, hdr);
       lastFencePost = get_right_header(hdr);
