@@ -211,6 +211,9 @@ static inline header *coalesse(header *right, header *left) {
   if (right_state != FENCEPOST && left_state != FENCEPOST) {
     add_to_free_list(right);
   }
+  else {
+    set_state(right, FENCEPOST);
+  }
 
   header *next = get_right_header(left);
   next->left_size = get_size(right);
