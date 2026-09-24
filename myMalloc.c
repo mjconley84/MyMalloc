@@ -360,7 +360,7 @@ static inline header * allocate_object(size_t raw_size) {
     //case 3, the block is bigger and can be split
     } else {
       new = get_header_from_offset(p, extra_size);
-      set_size(new, total_size);
+      set_size_and_state(new, total_size, ALLOCATED);
       new->left_size = extra_size;
       set_size(p, extra_size);
     }
