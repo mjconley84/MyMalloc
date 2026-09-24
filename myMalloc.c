@@ -254,6 +254,16 @@ static header * allocate_chunk(size_t size) {
   
   insert_fenceposts(mem, size);
   header * hdr = (header *) ((char *)mem + ALLOC_HEADER_SIZE);
+
+  if (lastFencePost != NULL) {
+    header *oldFencePost = get_left_header(get_left_header(hdr));
+    if (oldFencePost == lastFencePost) {
+      header *prev = get_left_header(hdr);
+      prev = coalesse(lastFencePost, prev);
+      mem = coalesse(prev, mem);
+      lastfence = true;
+    }
+  }
   set_state(hdr, UNALLOCATED);
   set_size(hdr, size - 2 * ALLOC_HEADER_SIZE);
   hdr->left_size = ALLOC_HEADER_SIZE;
