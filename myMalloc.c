@@ -273,9 +273,15 @@ static header * allocate_chunk(size_t size) {
     header *prev = get_left_header(hdr);
     header *oldFencePost = get_left_header(prev);
     if (oldFencePost == lastFencePost) {
+      header *prev_free = NULL;
       prev = coalesse(lastFencePost, prev);
       hdr = coalesse(prev, hdr);
+      prev_free = get_right_header(hdr);
+      if (get_state(prev_free) == UNALLOCATED) {
+        hdr = coalesse(prev_free, hdr);
+      }
       lastFencePost = get_right_header(hdr);
+
     } else {
       insert_os_chunk(prev);
     }
