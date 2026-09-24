@@ -276,6 +276,8 @@ static header * allocate_chunk(size_t size) {
       prev = coalesse(lastFencePost, prev);
       hdr = coalesse(prev, hdr);
       lastFencePost = get_right_header(hdr);
+    } else {
+      insert_os_chunk(prev);
     }
   }
 
