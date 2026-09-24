@@ -348,15 +348,6 @@ static inline header * allocate_object(size_t raw_size) {
       errno = ENOMEM;
       return NULL;
     }
-
-    header * prevFencePost = get_header_from_offset(p, -ALLOC_HEADER_SIZE);
-    insert_os_chunk(prevFencePost);
-
-    if (p == NULL) {
-      errno = ENOMEM;
-      return NULL;
-    }
-
   }
 
   if (p != NULL && get_size(p) >= total_size) {
