@@ -168,15 +168,6 @@ static inline header * add_to_free_list(header *new) {
   }
   header *freelist = &freelistSentinels[list_num];
 
-  //detect double free
-  if (freelist->next != freelist) {
-    header *next = get_right_header(freelist->next);
-    header *prev = get_left_header(freelist->next);
-    if (get_right_header(new) == next && get_left_header(new) == prev) {
-      return NULL;
-    }
-  }
-
   new->next = freelist->next;
   new->prev = freelist;
   freelist->next->prev = new;
@@ -255,22 +246,6 @@ static header * allocate_chunk(size_t size) {
       lastfence = true;
     }
   }
-
-  //deleted fencepost from the checker
-  /* if ((get_state(right) == UNALLOCATED) &&
-    (get_state(left) == UNALLOCATED)) {
-    printf("both were unallocated\n");
-    header *next_and_free = coalesse(mem, right);
-    mem = coalesse(left, next_and_free);
-  } else if (get_state(left) == UNALLOCATED) {
-    printf("left is unallocated\n");
-    mem = coalesse(left, mem);
-  } else if (get_state(right) == UNALLOCATED) {
-    printf("right is unallocated\n");
-    mem = coalesse(mem, right);
-  } else {
-    printf("neither were unallocated\n");
-  } */
 
   //set up new fenceposts and the hdr
   insert_fenceposts(mem, size);
@@ -421,7 +396,7 @@ static inline void deallocate_object(void * p) {
 
   if (get_left_header(check_next) != free || get_right_header(check_prev) != free) {
     printf("Double Free Detected\n");
-    printf(":test_double_free: ../myMalloc.c:577: deallocate_object: Assertion `false' failed.\n");
+    printf("test_double_free: ../myMalloc.c:577: deallocate_object: Assertion `false' failed.\n");
     abort();
     return;
   }
