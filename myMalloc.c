@@ -431,6 +431,10 @@ static inline void deallocate_object(void * p) {
     final = add_to_free_list(free);
   }
 
+  if (final == NULL) {
+    return;
+  }
+
   //TODO set the values of final (size, state, left and right pointers)
   set_state(final, UNALLOCATED);
 
