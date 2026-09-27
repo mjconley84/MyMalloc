@@ -420,6 +420,9 @@ static inline void deallocate_object(void * p) {
   header *final = NULL;
 
   if (get_left_header(check_next) != free || get_right_header(check_prev) != free) {
+    printf("Double Free Detected\n");
+    printf(":test_double_free: ../myMalloc.c:577: deallocate_object: Assertion `false' failed.\n");
+    abort();
     return;
   }
 
