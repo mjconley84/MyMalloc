@@ -168,6 +168,15 @@ static inline header * add_to_free_list(header *new) {
   }
   header *freelist = &freelistSentinels[list_num];
 
+  //detect double free
+  if (freelist->next != freelist) {
+    header *next = get_right_header(freelist->next);
+    header *prev = get_left_header(freelist->next);
+    if (get_right_header(new) == next && get_left_header(new) == prev) {
+      return NULL;
+    }
+  }
+
   new->next = freelist->next;
   new->prev = freelist;
   freelist->next->prev = new;
