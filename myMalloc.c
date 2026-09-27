@@ -219,7 +219,7 @@ static inline header *coalesse(header *right, header *left) {
   //add back to freelist but only if not fenceposts
   set_size_and_state(right, total_size, UNALLOCATED);
   if (!(right_state == FENCEPOST && left_state == FENCEPOST)) {
-    add_to_free_list(right);
+    right = add_to_free_list(right);
   }
   else {
     set_state(right, FENCEPOST);
@@ -410,10 +410,8 @@ static inline header * ptr_to_header(void * p) {
  * @param p The pointer returned to the user by a call to malloc
  */
 static inline void deallocate_object(void * p) {
-  // TODO implement deallocation
   header *free = ptr_to_header(p);
 
-  //TODO check if there are other cases in which we cannot free
   if (p == NULL || free == NULL || get_state(free) == UNALLOCATED) {
     return;
   }
