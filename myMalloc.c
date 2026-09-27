@@ -419,6 +419,10 @@ static inline void deallocate_object(void * p) {
   header *check_prev = get_left_header(free);
   header *final = NULL;
 
+  if (get_left_header(check_next) != free || get_right_header(check_prev) != free) {
+    return;
+  }
+
   //call coalesse with next and previous if those blocks are free
   if (get_state(check_next) == UNALLOCATED && get_state(check_prev) == UNALLOCATED) {
     header *next_and_free = coalesse(free, check_next);
