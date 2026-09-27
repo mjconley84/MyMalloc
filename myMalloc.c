@@ -347,7 +347,7 @@ static inline header * allocate_object(size_t raw_size) {
   if (p != NULL && get_size(p) >= total_size) {
     size_t extra_size = get_size(p) - total_size;
     //case 1, the block is exactly the correct size
-    if (get_size(p) == total_size || extra_size < sizeof(header)) {
+    if (get_size(p) == total_size || extra_size < ALLOC_HEADER_SIZE) {
       new = p;
       remove_from_freelist(p);
     //TODO: case 2 the block is bigger, but cannot be split //might not work
