@@ -207,6 +207,7 @@ static inline header *coalesse(header *right, header *left) {
     remove_from_freelist(left);
   }
 
+  //add back to freelist but only if not fenceposts
   set_size_and_state(right, total_size, UNALLOCATED);
   if (!(right_state == FENCEPOST && left_state == FENCEPOST)) {
     add_to_free_list(right);
@@ -215,6 +216,7 @@ static inline header *coalesse(header *right, header *left) {
     set_state(right, FENCEPOST);
   }
 
+  //update left size pointer
   header *next = get_right_header(left);
   next->left_size = get_size(right);
   return right;
@@ -403,7 +405,7 @@ static inline void deallocate_object(void * p) {
   header *free = ptr_to_header(p);
 
   //TODO check if there are other cases in which we cannot free
-  if (p == NULL) {
+  if (p == NULL || free == NULL || get_state(free) == UNALLOCATED) {
     return;
   }
   header *check_next = get_right_header(free);
@@ -421,13 +423,13 @@ static inline void deallocate_object(void * p) {
   } else {
     final = add_to_free_list(free);
   }
-  
+
   //TODO set the values of final (size, state, left and right pointers)
   set_state(final, UNALLOCATED);
 
   // set the left_size pointer for the pointer after the free block
-
-
+  check_next = get_right_header(final);
+  check_next->left_size = get_size(final);
 }
 
 /**
