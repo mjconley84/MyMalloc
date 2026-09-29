@@ -237,15 +237,10 @@ static inline header *coalesse(header *right, header *left) {
  */
 static header * allocate_chunk(size_t size) {
   void * mem = sbrk(size);
-  bool lastfence = false;
-  if (lastFencePost != NULL) {
-    if (get_left_header(mem) == lastFencePost) {
-      header *prev = get_left_header(lastFencePost);
-      mem = coalesse(lastFencePost, mem);
-      mem = coalesse(prev, mem);
-      lastfence = true;
-    }
+  if (mem == NULL) {
+    return NULL;
   }
+  bool lastfence = false;
 
   //set up new fenceposts and the hdr
   insert_fenceposts(mem, size);
@@ -270,6 +265,7 @@ static header * allocate_chunk(size_t size) {
 
     } else {
       insert_os_chunk(prev);
+      lastFencePost = get_right_header(hdr)
     }
   }
 
@@ -336,7 +332,7 @@ static inline header * allocate_object(size_t raw_size) {
   header *new = NULL;
 
   //if this is the last list we need to find a different obj
-  if (p == NULL || get_size(p) < total_size) {
+  while (p == NULL || get_size(p) < total_size) {
     p = allocate_chunk(ARENA_SIZE);
     if (p == NULL) {
       errno = ENOMEM;
@@ -347,8 +343,10 @@ static inline header * allocate_object(size_t raw_size) {
   if (p != NULL && get_size(p) >= total_size) {
     size_t extra_size = get_size(p) - total_size;
     //case 1, the block is exactly the correct size
-    if (get_size(p) == total_size || extra_size < ALLOC_HEADER_SIZE) {
+    if (get_size(p) == total_size || extra_size < sizeof(header)) {
       new = p;
+      set_size_and_state(new, get_size(p), ALLOCATED);
+      new->left_size = get_size(get_left_header(new));
       remove_from_freelist(p);
     //TODO: case 2 the block is bigger, but cannot be split //might not work
     //case 3, the block is bigger and can be split
@@ -394,7 +392,7 @@ static inline void deallocate_object(void * p) {
   header *check_prev = get_left_header(free);
   header *final = NULL;
 
-  if (get_left_header(check_next) != free || get_right_header(check_prev) != free) {
+  if (get_state(free) != ALLOCATED) {
     printf("Double Free Detected\n");
     printf("test_double_free: ../myMalloc.c:577: deallocate_object: Assertion `false' failed.\n");
     abort();
