@@ -298,17 +298,15 @@ static inline header * allocate_object(size_t raw_size) {
 
   int i = list_num;
   header * p = NULL;
-  header * next = NULL;
-  for (i; i < N_LISTS; i++) {
-    header * freelist = &freelistSentinels[i];
-    next = freelist->next;
-    while (freelist != next) {
-      if (get_size(next) >= total_size) {
-        p = next;
-        break;
-      }
-      next = next->next;
+ for (int i = list_num; i < N_LISTS && p == NULL; i++) {
+  header * sentinel = &freelistSentinels[i];
+  for (header * cur = sentinel->next; cur != sentinel; cur = cur->next) {
+    if (get_size(cur) >= total_size) {
+      p = cur;
+      break;
     }
+  }
+}
   }
   header *new = NULL;
 
