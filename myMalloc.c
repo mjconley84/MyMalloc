@@ -213,7 +213,9 @@ static inline header *coalesse(header *left, header *right) {
   if (left_was_free) {
     add_to_free_list(left);
   } else if (old_list != new_list) {
-    remove_from_freelist(left);
+    if (left_state != FENCEPOST) {
+      remove_from_freelist(left);
+    }
     add_to_free_list(left);
   }
 
@@ -343,7 +345,7 @@ static inline header * allocate_object(size_t raw_size) {
     set_state(new, ALLOCATED);
 
     //update the pointer to the right's left size attribute
-    get_header_from_offset(new, total_size)->left_size = total_size;
+    get_header_from_offset(new, get_size(new))->left_size = get_size(new);
   }
   return (header *) new->data;
 }
