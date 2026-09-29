@@ -204,13 +204,20 @@ static inline void remove_from_freelist(header *head) {
 }
 
 /**
- * @brief */
+ * @brief helper function to combine the two headers into one
+ *
+ * @param left the header to the left
+ * @param right the header to the right
+ *
+ * @return the combined header
+ */
 static inline header *coalesse(header *left, header *right) {
   size_t total_size = get_size(left) + get_size(right);
   int list_num = 0;
   int right_state = get_state(right);
   int left_state = get_state(left);
 
+  //if both are fenceposts, do not remove or add to list
   if (left_state == FENCEPOST && right_state == FENCEPOST) {
     set_size(left, total_size);
     get_right_header(left)->left_size = total_size;
@@ -220,15 +227,16 @@ static inline header *coalesse(header *left, header *right) {
   bool left_was_free = (left_state == UNALLOCATED);
   int old_list = left_was_free ? list_index(get_size(left)) : -1;
 
-
  //remove old list from the free list
   if (right_state == UNALLOCATED) {
     remove_from_freelist(right);
   }
 
+  //update the header's info
   set_size_and_state(left, total_size, UNALLOCATED);
   int new_list = list_index(total_size);
 
+  //remove and add to list
   if (!left_was_free) {
     add_to_free_list(left);
   } else if (old_list != new_list) {
@@ -242,10 +250,6 @@ static inline header *coalesse(header *left, header *right) {
   return left;
 }
 
-
-
-
-
 /**
  * @brief Allocate another chunk from the OS and prepare to insert it
  * into the free list
@@ -257,9 +261,8 @@ static inline header *coalesse(header *left, header *right) {
  */
 static header * allocate_chunk(size_t size) {
   void * mem = sbrk(size);
-  if (mem == NULL || mem == (void *) -1) {
-    return NULL;
-  }
+
+  if (mem == NULL || mem == (void *) -1) { return NULL; }
 
   //set up new fenceposts and the hdr
   insert_fenceposts(mem, size);
@@ -272,11 +275,15 @@ static header * allocate_chunk(size_t size) {
     add_to_free_list(hdr);
     header *prev = get_left_header(hdr);
     header *oldFencePost = get_left_header(prev);
+
+    //see if we need to combine fenceposts and current block
     if (oldFencePost == lastFencePost) {
       header *prev_free = NULL;
       prev = coalesse(lastFencePost, prev);
       hdr = coalesse(prev, hdr);
       prev_free = get_left_header(hdr);
+
+      //combine previous unallocated chunk and current unallocated chunk
       if (get_state(prev_free) == UNALLOCATED) {
         hdr = coalesse(prev_free, hdr);
       }
@@ -299,10 +306,7 @@ static header * allocate_chunk(size_t size) {
  * @return A block satisfying the user's request
  */
 static inline header * allocate_object(size_t raw_size) {
-  // TODO implement allocation
-  if (raw_size == 0) {
-    return NULL;
-  }
+  if (raw_size == 0) { return NULL; }
 
   //make sure we are allocating enough bytes
   size_t round_s = ((raw_size + 7) / 8) * 8;
@@ -341,15 +345,16 @@ static inline header * allocate_object(size_t raw_size) {
 
   if (p != NULL && get_size(p) >= total_size) {
     size_t extra_size = get_size(p) - total_size;
-    //case 1, the block is exactly the correct size
+    //case 1, the block is exactly the correct size and case 2, the extra size is not large enough to be a whole block
     if (get_size(p) == total_size || extra_size < sizeof(header)) {
       new = p;
       set_size_and_state(new, get_size(p), ALLOCATED);
       get_header_from_offset(new, get_size(new))->left_size = get_size(new);
       remove_from_freelist(p);
-    //TODO: case 2 the block is bigger, but cannot be split //might not work
+    }
+
     //case 3, the block is bigger and can be split
-    } else {
+    else {
       int old_list = list_index(get_size(p));
       int new_list = list_index(extra_size);
       set_size(p, extra_size);
@@ -391,10 +396,12 @@ static inline void deallocate_object(void * p) {
   if (p == NULL || free == NULL || get_state(free) == UNALLOCATED) {
     return;
   }
+
   header *check_next = get_right_header(free);
   header *check_prev = get_left_header(free);
   header *final = NULL;
 
+  //check double free
   if (get_state(free) != ALLOCATED || get_left_header(check_next) != free || get_right_header(check_prev) != free) {
     printf("Double Free Detected\n");
     printf("test_double_free: ../myMalloc.c:577: deallocate_object: Assertion `false' failed.\n");
@@ -418,10 +425,8 @@ static inline void deallocate_object(void * p) {
     return;
   }
 
-  //TODO set the values of final (size, state, left and right pointers)
+  // set info
   set_state(final, UNALLOCATED);
-
-  // set the left_size pointer for the pointer after the free block
   check_next = get_right_header(final);
   check_next->left_size = get_size(final);
 }
