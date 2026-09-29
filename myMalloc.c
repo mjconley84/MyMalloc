@@ -265,7 +265,7 @@ static header * allocate_chunk(size_t size) {
 
     } else {
       insert_os_chunk(prev);
-      lastFencePost = get_right_header(hdr)
+      lastFencePost = get_right_header(hdr);
     }
   }
 
