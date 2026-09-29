@@ -178,7 +178,7 @@ static inline header * add_to_free_list(header *new) {
 
 //taeks in the pointer, needs the size
 static inline void remove_from_freelist(header *head) {
-  assert (head == NULL || head->prev == NULL || head->next == NULL);
+  if (head == NULL || head->prev == NULL || head->next == NULL) {return;}
   head->prev->next = head->next;
   head->next->prev = head->prev;
 }
