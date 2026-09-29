@@ -238,7 +238,6 @@ static header * allocate_chunk(size_t size) {
   if (mem == NULL || mem == (void *) -1) {
     return NULL;
   }
-  bool lastfence = false;
 
   //set up new fenceposts and the hdr
   insert_fenceposts(mem, size);
