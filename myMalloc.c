@@ -265,7 +265,7 @@ static header * allocate_chunk(size_t size) {
 
     } else {
       insert_os_chunk(prev);
-      lastFencePost = get_right_header(hdr);
+      lastFencePost = get_right_header(hdr)
     }
   }
 
@@ -392,7 +392,7 @@ static inline void deallocate_object(void * p) {
   header *check_prev = get_left_header(free);
   header *final = NULL;
 
-  if (get_state(free) != ALLOCATED) {
+  if (get_left_header(check_next) != free || get_right_header(check_prev) != free) {
     printf("Double Free Detected\n");
     printf("test_double_free: ../myMalloc.c:577: deallocate_object: Assertion `false' failed.\n");
     abort();
