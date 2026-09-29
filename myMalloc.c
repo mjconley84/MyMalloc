@@ -303,7 +303,7 @@ static inline header * allocate_object(size_t raw_size) {
     header * freelist = &freelistSentinels[i];
     next = freelist->next;
     while (freelist != next) {
-      if (get_size(next >= total_size)) {
+      if (get_size(next) >= total_size) {
         p = next;
         break;
       }
