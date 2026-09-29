@@ -210,7 +210,7 @@ static inline header *coalesse(header *left, header *right) {
   set_size_and_state(left, total_size, UNALLOCATED);
   int new_list = list_index(total_size);
 
-  if (left_was_free) {
+  if (!left_was_free) {
     add_to_free_list(left);
   } else if (old_list != new_list) {
     if (left_state != FENCEPOST) {
