@@ -163,7 +163,7 @@ inline static void insert_fenceposts(void * raw_mem, size_t size) {
  *
  * @param size the size of the block
  *
- * @return the correct number of the list
+ * @return int the correct number of the list
  */
 static inline int list_index(size_t size) {
   int n = (size - ALLOC_HEADER_SIZE) / 8 - 1;
@@ -175,10 +175,14 @@ static inline int list_index(size_t size) {
  *
  * @param new the header that will be added
  *
- * @return header that was updated
+ * @return header (not often used but sometimes helps)
  */
 static inline header * add_to_free_list(header *new) {
-  int list_num = list_index(get_size(new));
+  int list_num = (get_size(new) - ALLOC_HEADER_SIZE) / 8 - 1;
+
+  if (list_num >= N_LISTS) {
+    list_num = N_LISTS - 1;
+  }
   header *freelist = &freelistSentinels[list_num];
 
   new->next = freelist->next;
@@ -200,20 +204,13 @@ static inline void remove_from_freelist(header *head) {
 }
 
 /**
- * @brief helper function to coalesse two blocks
- *
- * @param left the left header that will be returned
- * @param right the right header that is freed
- *
- * @return the header that is returned with updated info
- */
+ * @brief */
 static inline header *coalesse(header *left, header *right) {
   size_t total_size = get_size(left) + get_size(right);
   int list_num = 0;
   int right_state = get_state(right);
   int left_state = get_state(left);
 
-  //if both sides are fenceposts do not add or remove from lists
   if (left_state == FENCEPOST && right_state == FENCEPOST) {
     set_size(left, total_size);
     get_right_header(left)->left_size = total_size;
@@ -223,16 +220,15 @@ static inline header *coalesse(header *left, header *right) {
   bool left_was_free = (left_state == UNALLOCATED);
   int old_list = left_was_free ? list_index(get_size(left)) : -1;
 
+
  //remove old list from the free list
   if (right_state == UNALLOCATED) {
     remove_from_freelist(right);
   }
 
-  //update the left pointer
   set_size_and_state(left, total_size, UNALLOCATED);
   int new_list = list_index(total_size);
 
-  //remove and add to lists
   if (!left_was_free) {
     add_to_free_list(left);
   } else if (old_list != new_list) {
@@ -245,6 +241,10 @@ static inline header *coalesse(header *left, header *right) {
   get_right_header(left)->left_size = total_size;
   return left;
 }
+
+
+
+
 
 /**
  * @brief Allocate another chunk from the OS and prepare to insert it
@@ -272,18 +272,16 @@ static header * allocate_chunk(size_t size) {
     add_to_free_list(hdr);
     header *prev = get_left_header(hdr);
     header *oldFencePost = get_left_header(prev);
-    //coalesse fenceposts if they are next to each other and then the full block
     if (oldFencePost == lastFencePost) {
       header *prev_free = NULL;
       prev = coalesse(lastFencePost, prev);
       hdr = coalesse(prev, hdr);
       prev_free = get_left_header(hdr);
-      //coalesse the current unallocated block and the free block behind it
       if (get_state(prev_free) == UNALLOCATED) {
         hdr = coalesse(prev_free, hdr);
       }
       lastFencePost = get_right_header(hdr);
-    //no need to coalesse, simply add it
+
     } else {
       insert_os_chunk(prev);
       lastFencePost = get_right_header(hdr);
@@ -312,7 +310,10 @@ static inline header * allocate_object(size_t raw_size) {
     round_s = ALLOC_HEADER_SIZE;
   }
 
-  int list_num = list_index(round_s);
+  int list_num = round_s / 8 - 1;
+  if (list_num >= N_LISTS) {
+    list_num = N_LISTS - 1;
+  }
 
   size_t total_size = round_s + ALLOC_HEADER_SIZE;
 
