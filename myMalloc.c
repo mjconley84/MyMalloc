@@ -158,7 +158,10 @@ inline static void insert_fenceposts(void * raw_mem, size_t size) {
   initialize_fencepost(rightFencePost, size - 2 * ALLOC_HEADER_SIZE);
 }
 
-
+static inline int list_index(size_t size) {
+  int n = (size - ALLOC_HEADER_SIZE) / 8 - 1;
+  return n >= N_LISTS ? N_LISTS - 1 : n;
+}
 
 static inline header * add_to_free_list(header *new) {
   int list_num = (get_size(new) - ALLOC_HEADER_SIZE) / 8 - 1;
@@ -188,30 +191,26 @@ static inline header *coalesse(header *right, header *left) {
   int list_num = 0;
   int right_state = get_state(right);
   int left_state = get_state(left);
+  int old_list = list_index(get_size(p));
+  int new_list = list_index(total_size);
 
-  //remove old list from the free list
-  if (right_state == UNALLOCATED) {
-    list_num = (get_size(right)  - ALLOC_HEADER_SIZE) / 8 - 1;
-    if (list_num >= N_LISTS) {
-       list_num = N_LISTS - 1;
-    }
-    remove_from_freelist(right);
-  }
+ //remove old list from the free list
   if (left_state == UNALLOCATED) {
-    list_num = (get_size(left) - ALLOC_HEADER_SIZE) / 8 - 1;
-    if (list_num >= N_LISTS) {
-      list_num = N_LISTS - 1;
-    }
     remove_from_freelist(left);
   }
 
-  //add back to freelist but only if not fenceposts
-  set_size_and_state(right, total_size, UNALLOCATED);
-  if (!(right_state == FENCEPOST && left_state == FENCEPOST)) {
-    right = add_to_free_list(right);
-  }
-  else {
-    set_state(right, FENCEPOST);
+  set_size(p, extra_size);
+  if (old_list != new_list) {
+    remove_from_freelist(right);
+
+    //add back to freelist but only if not fenceposts
+    set_size_and_state(right, total_size, UNALLOCATED);
+    if (!(right_state == FENCEPOST && left_state == FENCEPOST)) {
+      right = add_to_free_list(right);
+    }
+    else {
+      set_state(right, FENCEPOST);
+    }
   }
 
   //update left size pointer
@@ -328,12 +327,16 @@ static inline header * allocate_object(size_t raw_size) {
     //TODO: case 2 the block is bigger, but cannot be split //might not work
     //case 3, the block is bigger and can be split
     } else {
-      remove_from_freelist(p);
+      int old_list = list_index(get_size(p));
+      int new_list = list_index(extra_size);
+      set_size(p, extra_size);
+      if (old_list != new_list) {
+        remove_from_freelist(p);
+        add_to_free_list(p);
+      }
       new = get_header_from_offset(p, extra_size);
       set_size_and_state(new, total_size, ALLOCATED);
       new->left_size = extra_size;
-      set_size(p, extra_size);
-      add_to_free_list(p);
     }
     set_state(new, ALLOCATED);
 

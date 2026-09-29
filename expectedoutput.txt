@@ -1,4 +1,4 @@
-EST: test_large.c
+TEST: test_large.c
 INTIAL STATE
 
 FREELIST
