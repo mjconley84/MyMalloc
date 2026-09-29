@@ -178,9 +178,7 @@ static inline header * add_to_free_list(header *new) {
 
 //taeks in the pointer, needs the size
 static inline void remove_from_freelist(header *head) {
-  if (head == NULL || head->prev == NULL || head->next == NULL) {
-    return;
-  }
+  assert (head == NULL || head->prev == NULL || head->next == NULL);
   head->prev->next = head->next;
   head->next->prev = head->prev;
 }
@@ -273,28 +271,6 @@ static header * allocate_chunk(size_t size) {
 }
 
 /**
- * @brief Helper to find a block of the right size in the free list
- *
- * @param actual_size
- *
- * @return a pointer to the block in the free list
-*/
-header * find_free(size_t actual_size) { // actual_size does not include the header. see if we need to add the header size to actualsize
-  header *p = NULL;
-  header *next = NULL;
-  int i = actual_size / 8;
-  for (i; i < N_LISTS; i++) {
-    p = &freelistSentinels[i];
-    next = p->next;
-    if (next != p && p->size_state > actual_size) {
-      return p;
-    }
-  }
-  return NULL;
-}
-
-
-/**
  * @brief Helper allocate an object given a raw request size from the user
  *
  * @param raw_size number of bytes the user needs
@@ -322,11 +298,16 @@ static inline header * allocate_object(size_t raw_size) {
 
   int i = list_num;
   header * p = NULL;
+  header * next = NULL;
   for (i; i < N_LISTS; i++) {
     header * freelist = &freelistSentinels[i];
-    if (freelist != freelist->next) {
-      p = freelist->next;
-      break;
+    next = freelist->next;
+    while (freelist != next) {
+      if (get_size(next >= total_size)) {
+        p = next;
+        break;
+      }
+      next = next->next;
     }
   }
   header *new = NULL;
