@@ -186,36 +186,39 @@ static inline void remove_from_freelist(header *head) {
   head->next->prev = head->prev;
 }
 
-static inline header *coalesse(header *right, header *left) {
-  size_t total_size = get_size(right) + get_size(left);
+static inline header *coalesse(header *left, header *right) {
+  size_t total_size = get_size(left) + get_size(right);
   int list_num = 0;
   int right_state = get_state(right);
   int left_state = get_state(left);
-  int old_list = list_index(get_size(right));
-  int new_list = list_index(total_size);
+
+  if (left_state == FENCEPOST && right_state == FENCEPOST) {
+    set_size(left, total_size);
+    get_right_header(left)->left_size = total_size;
+    return left;
+  }
+
+  bool left_was_free = (left_state == UNALLOCATED);
+  int old_list = left_was_free ? list_index(get_size(left)) : -1;
+
 
  //remove old list from the free list
-  if (left_state == UNALLOCATED) {
-    remove_from_freelist(left);
-  }
-
-  if (old_list != new_list) {
+  if (right_state == UNALLOCATED) {
     remove_from_freelist(right);
-
-    //add back to freelist but only if not fenceposts
-    set_size_and_state(right, total_size, UNALLOCATED);
-    if (!(right_state == FENCEPOST && left_state == FENCEPOST)) {
-      right = add_to_free_list(right);
-    }
-    else {
-      set_size_and_state(right, total_size, FENCEPOST);
-    }
   }
 
-  //update left size pointer
-  header *next = get_right_header(left);
-  next->left_size = get_size(right);
-  return right;
+  set_size_and_state(left, total_size, UNALLOCATED);
+  int new_list = list_index(total_size);
+
+  if (left_was_free) {
+    add_to_free_list(left);
+  } else if (old_list != new_list) {
+    remove_from_freelist(left);
+    add_to_free_list(left);
+  }
+
+  get_right_header(left)->left_size = total_size;
+  return left;
 }
 
 
