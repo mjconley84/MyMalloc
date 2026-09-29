@@ -191,7 +191,7 @@ static inline header *coalesse(header *right, header *left) {
   int list_num = 0;
   int right_state = get_state(right);
   int left_state = get_state(left);
-  int old_list = list_index(get_size(p));
+  int old_list = list_index(get_size(right));
   int new_list = list_index(total_size);
 
  //remove old list from the free list
