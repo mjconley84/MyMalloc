@@ -199,7 +199,6 @@ static inline header *coalesse(header *right, header *left) {
     remove_from_freelist(left);
   }
 
-  set_size(p, extra_size);
   if (old_list != new_list) {
     remove_from_freelist(right);
 
@@ -209,7 +208,7 @@ static inline header *coalesse(header *right, header *left) {
       right = add_to_free_list(right);
     }
     else {
-      set_state(right, FENCEPOST);
+      set_size_and_state(right, total_size, FENCEPOST);
     }
   }
 
