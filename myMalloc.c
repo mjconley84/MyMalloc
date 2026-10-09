@@ -1,3 +1,10 @@
+/* README:
+ * This project was as assigment for my Operating Systems class. As such I did not write all of the code.
+ * Functions written by me will have an author note in the comment above. Otherwise, all author credits go to the CS 252 team at Purdue.
+ * Only this file was edited by me. All other files were created by the CS 252 Purdue team. 
+ */
+
+
 #include <errno.h>
 #include <pthread.h>
 #include <stddef.h>
@@ -171,6 +178,7 @@ static inline int list_index(size_t size) {
 }
 
 /**
+ * @author Maggie Conley
  * @brief helper function that adds a header to the free list
  *
  * @param new the header that will be added
@@ -193,6 +201,7 @@ static inline header * add_to_free_list(header *new) {
 }
 
 /**
+ * @author Maggie Conley
  * @brief a helper function to remove a header from a freelist
  *
  * @param head the header to remove
@@ -204,6 +213,7 @@ static inline void remove_from_freelist(header *head) {
 }
 
 /**
+ * @author Maggie Conley
  * @brief helper function to combine the two headers into one
  *
  * @param left the header to the left
@@ -251,6 +261,7 @@ static inline header *coalesse(header *left, header *right) {
 }
 
 /**
+ * @author Maggie Conley
  * @brief Allocate another chunk from the OS and prepare to insert it
  * into the free list
  *
@@ -299,6 +310,7 @@ static header * allocate_chunk(size_t size) {
 }
 
 /**
+ * @author Maggie Conley
  * @brief Helper allocate an object given a raw request size from the user
  *
  * @param raw_size number of bytes the user needs
@@ -375,6 +387,7 @@ static inline header * allocate_object(size_t raw_size) {
 }
 
 /**
+ * @author Maggie Conley
  * @brief Helper to get the header from a pointer allocated with malloc
  *
  * @param p pointer to the data region of the block
@@ -386,6 +399,7 @@ static inline header * ptr_to_header(void * p) {
 }
 
 /**
+ * @author Maggie Conley
  * @brief Helper to manage deallocation of a pointer returned by the user
  *
  * @param p The pointer returned to the user by a call to malloc
