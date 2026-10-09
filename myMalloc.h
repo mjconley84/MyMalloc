@@ -1,3 +1,6 @@
+/*
+ * README: this file was written by the CS 252 Purdue team. 
+ */
 #ifndef MY_MALLOC_H
 #define MY_MALLOC_H
 
